@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct GridView: View {
     
-    var posts: [Post]
+    //var posts: [Post]
+    //let user: User
+    @StateObject var viewModel: PostGridViewModel
+    
+    init(user: User){
+        self._viewModel = StateObject(wrappedValue: PostGridViewModel(user: user))
+    }
     
     //创建三个grid对象 有灵活的尺寸和一个像素
     //列间距
@@ -25,8 +32,8 @@ struct GridView: View {
         LazyVGrid(columns: gridItems, spacing: 1) {
             
             // id 给每个图一个id
-            ForEach(posts){ post in
-                Image(post.imageUrl)
+            ForEach(viewModel.posts){ post in
+                KFImage(URL(string: post.imageUrl))
                     .resizable()
                     .scaledToFill()
                     .frame(width: imageDimension, height: imageDimension)
@@ -38,6 +45,6 @@ struct GridView: View {
 
 struct GridView_Previews: PreviewProvider {
     static var previews: some View {
-        GridView(posts: Post.MOCK_POSTS)
+        GridView( user: User.MOCK_USERS[0])
     }
 }

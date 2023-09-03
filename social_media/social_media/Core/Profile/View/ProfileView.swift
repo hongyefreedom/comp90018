@@ -11,9 +11,11 @@ struct ProfileView: View {
     
     let user: User
     
-    var posts: [Post] {
-        return Post.MOCK_POSTS.filter({ $0.user?.username == user.username})
-    }
+//    var posts: [Post] {
+//        return Post.MOCK_POSTS.filter({ $0.user?.username == user.username})
+//    }
+    
+    
     
     var body: some View {
         //NavigationStack {
@@ -24,7 +26,7 @@ struct ProfileView: View {
                 
                 // grid
                 // 行间距
-                GridView(posts: posts)
+                GridView(user: user)
             }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)

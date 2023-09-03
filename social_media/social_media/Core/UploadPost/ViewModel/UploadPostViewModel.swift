@@ -8,6 +8,7 @@
 import Foundation
 import PhotosUI
 import SwiftUI
+import Firebase
 
 @MainActor
 class UploadPostViewModel: ObservableObject {
@@ -20,6 +21,7 @@ class UploadPostViewModel: ObservableObject {
     
     //把图片存入这里
     @Published var postImage: Image?
+    private var uiImage: UIImage?
     
     //查看我们从PhotosPickerItem中选择的对象
     func loadImage(fromItem item: PhotosPickerItem?) async {
@@ -33,9 +35,22 @@ class UploadPostViewModel: ObservableObject {
         //创建一个UIimage，把数据放进去
         guard let uiImage = UIImage(data: data) else {return}
         
+        self.uiImage = uiImage
         //把它放入SwiftUI
         self.postImage = Image(uiImage: uiImage)
         
         
+    }
+    
+    func uploadPost(caption: String) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uiImage = uiImage else { return }
+        
+        let postRef = Firestore.firestore().collection("posts").document()
+        guard let imageUrl = try await ImageUploader.uploadImage(image: uiImage) else { return }
+        let post = Post(id: postRef.documentID, ownerUid: uid, caption: caption, likes: 0, imageUrl: imageUrl, timestamp: Timestamp())
+        guard let encodePost = try? Firestore.Encoder().encode(post) else { return }
+        
+        try await postRef.setData(encodePost)
     }
 }
