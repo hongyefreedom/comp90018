@@ -25,12 +25,7 @@ struct SearchView: View {
                             // 图像&用户名
                             HStack{
 
-                                Image(systemName: "person.circle")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .foregroundColor(.gray)
-                                    .frame(width: 40, height: 40)
-                                    .clipShape(Circle())
+                                CircularProfileImageView(user: user, size: .xSmall)
                                 
                                 VStack(alignment: .leading){
                                     Text(user.username)

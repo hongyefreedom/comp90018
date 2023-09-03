@@ -16,11 +16,7 @@ struct ProfileHeaderView: View {
         VStack(spacing: 10){
             
             HStack{
-                Image(user.profileImageUrl ?? "")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 80, height: 80)
-                    .clipShape(Circle())
+                CircularProfileImageView(user: user, size: .large)
                 
                 Spacer()
                 
@@ -52,7 +48,7 @@ struct ProfileHeaderView: View {
                     //.fontWeight(.semibold)
                 }
                 
-                Text(user.username)
+                //Text(user.username)
             }
             //把stack放到最左边
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -83,7 +79,7 @@ struct ProfileHeaderView: View {
             Divider()
         }
         .fullScreenCover(isPresented: $showEditProfile) {
-            Text("Edit profile view")
+            EditProfileView(user: user)
         }
     }
 }
