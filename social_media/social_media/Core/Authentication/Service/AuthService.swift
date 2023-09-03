@@ -15,13 +15,13 @@ class AuthService {
     
     //这个绘画来确认是不是登陆了
     @Published var userSession: FirebaseAuth.User?
+    @Published var currentUser: User?
     
     //实例化
     static let shared = AuthService()
     
     init() {
-        //检查是否用户登陆了
-        self.userSession = Auth.auth().currentUser
+        Task { try await loadUserData() }
     }
     
     @MainActor
@@ -31,6 +31,7 @@ class AuthService {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
+            try await loadUserData()
         } catch {
             print("DEBUG: Failed to log in with error \(error.localizedDescription)")
         }
@@ -46,9 +47,7 @@ class AuthService {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            print("DEBUG: Did create user data..")
             await uploadUserData(uid: result.user.uid, username: username, email: email)
-            print("DEBUG: Did upload user data..")
         } catch {
             print("DEBUG: Failed to register user with error \(error.localizedDescription)")
             
@@ -56,20 +55,28 @@ class AuthService {
     }
     
     //加载用户的数据
+    @MainActor
     func loadUserData() async throws {
+        self.userSession = Auth.auth().currentUser
+        guard let currentUid = userSession?.uid else { return }
+        let snapshot = try await Firestore.firestore().collection("users").document(currentUid).getDocument()
         
+        //decode data
+        self.currentUser = try? snapshot.data(as: User.self)
     }
     
     //登出
     func signout() {
         try? Auth.auth().signOut()
         self.userSession = nil
+        self.currentUser = nil
     }
     
     private func uploadUserData(uid: String, username: String, email: String) async {
         let user = User(id: uid, username: username, email: email)
+        self.currentUser = user
         
-        //要这样转换一下 不能直接上传
+        //要这样encode一下 不能直接上传
         guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
         
         //传入firebase

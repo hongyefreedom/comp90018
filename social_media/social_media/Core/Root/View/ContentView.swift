@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
+    //ContentViewModel()保持listen viewModel
     @StateObject var viewModel = ContentViewModel()
     @StateObject var registrationViewModel = RegistrationViewModel()
     
@@ -17,8 +18,8 @@ struct ContentView: View {
             if viewModel.userSession == nil {
                 LoginView()
                     .environmentObject(registrationViewModel)
-            } else {
-                MainTabView()
+            } else if let currentUser = viewModel.currentUser {
+                MainTabView(user: currentUser)
             }
         }
         //MainTabView()

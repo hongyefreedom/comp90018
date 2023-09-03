@@ -39,6 +39,10 @@
 		40CED9BE2A9F246900AFBE69 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9BD2A9F246900AFBE69 /* ContentViewModel.swift */; };
 		40CED9C12AA4249D00AFBE69 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9C02AA4249C00AFBE69 /* RegistrationViewModel.swift */; };
 		40D788722AA43DDF000BA85A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D788712AA43DDF000BA85A /* LoginViewModel.swift */; };
+		40D788742AA453ED000BA85A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D788732AA453ED000BA85A /* UserService.swift */; };
+		40D788782AA455F3000BA85A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D788772AA455F3000BA85A /* SearchViewModel.swift */; };
+		40D7887A2AA45F24000BA85A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D788792AA45F24000BA85A /* EditProfileView.swift */; };
+		40D7887E2AA466BD000BA85A /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D7887D2AA466BD000BA85A /* EditProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +75,10 @@
 		40CED9BD2A9F246900AFBE69 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		40CED9C02AA4249C00AFBE69 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		40D788712AA43DDF000BA85A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		40D788732AA453ED000BA85A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		40D788772AA455F3000BA85A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		40D788792AA45F24000BA85A /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		40D7887D2AA466BD000BA85A /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +138,7 @@
 		40CED9742A9DF97C00AFBE69 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				40D788732AA453ED000BA85A /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -186,7 +195,8 @@
 		40CED97C2A9E216700AFBE69 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				40CED98E2A9E4D4400AFBE69 /* SearchView.swift */,
+				40D788762AA455C7000BA85A /* View */,
+				40D788752AA455B5000BA85A /* ViewModel */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -203,9 +213,8 @@
 		40CED97E2A9E217C00AFBE69 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				40CED9842A9E251600AFBE69 /* ProfileView.swift */,
-				40CED9A02A9EEF7800AFBE69 /* CurrentUserProfileView.swift */,
-				40CED9A62A9EFEF900AFBE69 /* ProfileHeaderView.swift */,
+				40D7887C2AA46672000BA85A /* View */,
+				40D7887B2AA46664000BA85A /* ViewModel */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -289,6 +298,41 @@
 				40D788712AA43DDF000BA85A /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		40D788752AA455B5000BA85A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				40D788772AA455F3000BA85A /* SearchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		40D788762AA455C7000BA85A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				40CED98E2A9E4D4400AFBE69 /* SearchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		40D7887B2AA46664000BA85A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				40D7887D2AA466BD000BA85A /* EditProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		40D7887C2AA46672000BA85A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				40CED9842A9E251600AFBE69 /* ProfileView.swift */,
+				40CED9A02A9EEF7800AFBE69 /* CurrentUserProfileView.swift */,
+				40CED9A62A9EFEF900AFBE69 /* ProfileHeaderView.swift */,
+				40D788792AA45F24000BA85A /* EditProfileView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,7 +420,9 @@
 				40CED9852A9E251600AFBE69 /* ProfileView.swift in Sources */,
 				40CED9692A9DF86900AFBE69 /* ContentView.swift in Sources */,
 				40CED9912A9E529F00AFBE69 /* LoginView.swift in Sources */,
+				40D7887E2AA466BD000BA85A /* EditProfileViewModel.swift in Sources */,
 				40CED9BA2A9F215700AFBE69 /* AuthService.swift in Sources */,
+				40D788742AA453ED000BA85A /* UserService.swift in Sources */,
 				40CED9A32A9EF28500AFBE69 /* Post.swift in Sources */,
 				40CED9672A9DF86900AFBE69 /* social_mediaApp.swift in Sources */,
 				40CED9A12A9EEF7800AFBE69 /* CurrentUserProfileView.swift in Sources */,
@@ -384,6 +430,7 @@
 				40CED9992A9EE00500AFBE69 /* CreateUsernameView.swift in Sources */,
 				40CED98F2A9E4D4400AFBE69 /* SearchView.swift in Sources */,
 				40CED9BE2A9F246900AFBE69 /* ContentViewModel.swift in Sources */,
+				40D7887A2AA45F24000BA85A /* EditProfileView.swift in Sources */,
 				40D788722AA43DDF000BA85A /* LoginViewModel.swift in Sources */,
 				40CED9AB2A9F0FAC00AFBE69 /* UploadPostViewModel.swift in Sources */,
 				40CED9A72A9EFEF900AFBE69 /* ProfileHeaderView.swift in Sources */,
@@ -394,6 +441,7 @@
 				40CED9C12AA4249D00AFBE69 /* RegistrationViewModel.swift in Sources */,
 				40CED98B2A9E420B00AFBE69 /* FeedView.swift in Sources */,
 				40CED9832A9E22BE00AFBE69 /* MainTabView.swift in Sources */,
+				40D788782AA455F3000BA85A /* SearchViewModel.swift in Sources */,
 				40CED9A52A9EFBDC00AFBE69 /* GridView.swift in Sources */,
 				40CED99B2A9EE32300AFBE69 /* CreatePasswordView.swift in Sources */,
 			);

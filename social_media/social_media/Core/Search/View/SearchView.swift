@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @State private var searchText = ""
+    @StateObject var viewModel = SearchViewModel()
     
     var body: some View {
         
@@ -17,16 +18,17 @@ struct SearchView: View {
         NavigationStack {
             ScrollView{
                 LazyVStack(spacing: 12){
-                    ForEach(User.MOCK_USERS) { user in
+                    ForEach(viewModel.users) { user in
                         
                         //这个写法是带着数据走的
                         NavigationLink(value: user) {
                             // 图像&用户名
                             HStack{
 
-                                Image(user.profileImageUrl ?? "")
+                                Image(systemName: "person.circle")
                                     .resizable()
                                     .scaledToFill()
+                                    .foregroundColor(.gray)
                                     .frame(width: 40, height: 40)
                                     .clipShape(Circle())
                                 
