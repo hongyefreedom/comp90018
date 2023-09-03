@@ -37,7 +37,8 @@
 		40CED9B62A9F1BDC00AFBE69 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 40CED9B52A9F1BDC00AFBE69 /* FirebaseStorage */; };
 		40CED9BA2A9F215700AFBE69 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9B92A9F215700AFBE69 /* AuthService.swift */; };
 		40CED9BE2A9F246900AFBE69 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9BD2A9F246900AFBE69 /* ContentViewModel.swift */; };
-		40CED9C12AA4249D00AFBE69 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9C02AA4249C00AFBE69 /* RegisterViewModel.swift */; };
+		40CED9C12AA4249D00AFBE69 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9C02AA4249C00AFBE69 /* RegistrationViewModel.swift */; };
+		40D788722AA43DDF000BA85A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D788712AA43DDF000BA85A /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,7 +69,8 @@
 		40CED9AC2A9F1AED00AFBE69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		40CED9B92A9F215700AFBE69 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		40CED9BD2A9F246900AFBE69 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		40CED9C02AA4249C00AFBE69 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		40CED9C02AA4249C00AFBE69 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		40D788712AA43DDF000BA85A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,7 +269,7 @@
 		40CED9BB2A9F243700AFBE69 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				40CED9BD2A9F246900AFBE69 /* ContentViewModel.swift */,
+				40CED9682A9DF86900AFBE69 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -275,7 +277,7 @@
 		40CED9BC2A9F243E00AFBE69 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				40CED9682A9DF86900AFBE69 /* ContentView.swift */,
+				40CED9BD2A9F246900AFBE69 /* ContentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -283,7 +285,8 @@
 		40CED9BF2AA4245B00AFBE69 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				40CED9C02AA4249C00AFBE69 /* RegisterViewModel.swift */,
+				40CED9C02AA4249C00AFBE69 /* RegistrationViewModel.swift */,
+				40D788712AA43DDF000BA85A /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -381,13 +384,14 @@
 				40CED9992A9EE00500AFBE69 /* CreateUsernameView.swift in Sources */,
 				40CED98F2A9E4D4400AFBE69 /* SearchView.swift in Sources */,
 				40CED9BE2A9F246900AFBE69 /* ContentViewModel.swift in Sources */,
+				40D788722AA43DDF000BA85A /* LoginViewModel.swift in Sources */,
 				40CED9AB2A9F0FAC00AFBE69 /* UploadPostViewModel.swift in Sources */,
 				40CED9A72A9EFEF900AFBE69 /* ProfileHeaderView.swift in Sources */,
 				40CED99F2A9EE71A00AFBE69 /* User.swift in Sources */,
 				40CED9972A9ED89200AFBE69 /* IGTextFieldModifier.swift in Sources */,
 				40CED99D2A9EE45500AFBE69 /* CompleteSignupView.swift in Sources */,
 				40CED9892A9E30D300AFBE69 /* UserStatView.swift in Sources */,
-				40CED9C12AA4249D00AFBE69 /* RegisterViewModel.swift in Sources */,
+				40CED9C12AA4249D00AFBE69 /* RegistrationViewModel.swift in Sources */,
 				40CED98B2A9E420B00AFBE69 /* FeedView.swift in Sources */,
 				40CED9832A9E22BE00AFBE69 /* MainTabView.swift in Sources */,
 				40CED9A52A9EFBDC00AFBE69 /* GridView.swift in Sources */,
