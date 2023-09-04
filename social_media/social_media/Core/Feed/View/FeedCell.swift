@@ -7,6 +7,18 @@
 
 import SwiftUI
 import Kingfisher
+import Firebase
+
+func formattedDate(timestamp: Timestamp) -> String {
+    let date = timestamp.dateValue()
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-M-d HH:mm:ss"
+    dateFormatter.timeZone = TimeZone(identifier: "UTC+10") // 设置时区
+    
+    return dateFormatter.string(from: date)
+}
+
 
 struct FeedCell: View {
     
@@ -87,7 +99,7 @@ struct FeedCell: View {
             .font(.footnote)
             
             //时间戳
-            Text("6h ago")
+            Text("\(formattedDate(timestamp: post.timestamp))")
                 .font(.footnote)
             //对齐到最左边
                 .frame(maxWidth: .infinity, alignment: .leading)
