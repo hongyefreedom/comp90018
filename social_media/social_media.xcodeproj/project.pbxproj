@@ -49,6 +49,7 @@
 		40D7888B2AA48BE9000BA85A /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D7888A2AA48BE9000BA85A /* FeedViewModel.swift */; };
 		40D7888D2AA49465000BA85A /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D7888C2AA49465000BA85A /* PostService.swift */; };
 		40D788912AA4981E000BA85A /* PostGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D788902AA4981E000BA85A /* PostGridViewModel.swift */; };
+		40DBEF702ADE450D00F72E20 /* Timestamp+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DBEF6F2ADE450D00F72E20 /* Timestamp+Comparable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		40D7888A2AA48BE9000BA85A /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		40D7888C2AA49465000BA85A /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		40D788902AA4981E000BA85A /* PostGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGridViewModel.swift; sourceTree = "<group>"; };
+		40DBEF6F2ADE450D00F72E20 /* Timestamp+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timestamp+Comparable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		40CED9772A9DF99B00AFBE69 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				40DBEF6F2ADE450D00F72E20 /* Timestamp+Comparable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				40CED99F2A9EE71A00AFBE69 /* User.swift in Sources */,
 				40CED9972A9ED89200AFBE69 /* IGTextFieldModifier.swift in Sources */,
 				40CED99D2A9EE45500AFBE69 /* CompleteSignupView.swift in Sources */,
+				40DBEF702ADE450D00F72E20 /* Timestamp+Comparable.swift in Sources */,
 				40CED9892A9E30D300AFBE69 /* UserStatView.swift in Sources */,
 				40CED9C12AA4249D00AFBE69 /* RegistrationViewModel.swift in Sources */,
 				40CED98B2A9E420B00AFBE69 /* FeedView.swift in Sources */,

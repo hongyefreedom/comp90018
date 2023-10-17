@@ -15,7 +15,7 @@ struct FeedView: View {
         NavigationStack {
             ScrollView{
                 LazyVStack(spacing: 40) {
-                    ForEach(viewModel.posts) { post in
+                    ForEach(viewModel.posts.reversed()) { post in
                         FeedCell(post: post)
                     }
                 }
@@ -40,6 +40,7 @@ struct FeedView: View {
         }
     }
 }
+
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {

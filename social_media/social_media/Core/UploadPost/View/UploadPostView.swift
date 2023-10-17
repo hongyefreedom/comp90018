@@ -41,6 +41,9 @@ struct UploadPostView: View {
                     Task {
                         try await viewModel.uploadPost(caption: caption)
                         clearPostDataAndReturnToFeed()
+                        
+                        // 手动刷新视图
+                        viewModel.objectWillChange.send()
                     }
                 } label: {
                     Text("Upload")

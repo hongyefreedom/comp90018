@@ -52,5 +52,7 @@ class UploadPostViewModel: ObservableObject {
         guard let encodePost = try? Firestore.Encoder().encode(post) else { return }
         
         try await postRef.setData(encodePost)
+        
+        objectWillChange.send()
     }
 }
