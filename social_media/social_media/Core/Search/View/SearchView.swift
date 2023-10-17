@@ -8,35 +8,32 @@
 import SwiftUI
 
 struct SearchView: View {
-    
     @State private var searchText = ""
     @StateObject var viewModel = SearchViewModel()
-    
-    var body: some View {
-        
-        //放到这里的东西能跳转
-        NavigationStack {
-            ScrollView{
-                LazyVStack(spacing: 12){
-                    ForEach(viewModel.users) { user in
-                        
-                        //这个写法是带着数据走的
-                        NavigationLink(value: user) {
-                            // 图像&用户名
-                            HStack{
 
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                // 使用.searchable样式的TextField
+                TextField("Search...", text: $searchText)
+                    .textFieldStyle(.plain)
+                    .padding(.horizontal)
+
+                LazyVStack(spacing: 12) {
+                    ForEach(viewModel.users.filter {
+                        searchText.isEmpty || $0.username.localizedCaseInsensitiveContains(searchText)
+                    }) { user in
+                        NavigationLink(value: user) {
+                            HStack {
                                 CircularProfileImageView(user: user, size: .xSmall)
-                                
-                                VStack(alignment: .leading){
+                                VStack(alignment: .leading) {
                                     Text(user.username)
                                         .fontWeight(.semibold)
-                                    
                                     if let fullname = user.fullname {
                                         Text(fullname)
                                     }
                                 }
                                 .font(.footnote)
-                                
                                 Spacer()
                             }
                             .foregroundColor(.black)
@@ -45,8 +42,6 @@ struct SearchView: View {
                     }
                 }
                 .padding(.top, 8)
-                //加这个才能搜索
-                .searchable(text: $searchText, prompt: "Search...")
             }
             .navigationDestination(for: User.self, destination: { user in
                 ProfileView(user: user)
@@ -56,6 +51,7 @@ struct SearchView: View {
         }
     }
 }
+
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
