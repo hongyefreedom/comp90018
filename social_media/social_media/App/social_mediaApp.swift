@@ -21,9 +21,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct social_mediaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    @StateObject var feedViewModel = FeedViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(feedViewModel) // 注入 FeedViewModel 到视图中
         }
     }
 }

@@ -13,6 +13,7 @@ struct UploadPostView: View {
     @State private var caption = ""
     @State private var imagePickerPresented = false
     
+    @EnvironmentObject var feedViewModel: FeedViewModel
     //这个view model负责访问并上传图片
     @StateObject var viewModel = UploadPostViewModel()
     
@@ -42,8 +43,9 @@ struct UploadPostView: View {
                         try await viewModel.uploadPost(caption: caption)
                         clearPostDataAndReturnToFeed()
                         
-                        // 手动刷新视图
-                        viewModel.objectWillChange.send()
+                        //在成功上传后，手动刷新FeedViewModel，以确保新帖子被添加
+                        try await feedViewModel.fetchPosts()
+                        
                     }
                 } label: {
                     Text("Upload")

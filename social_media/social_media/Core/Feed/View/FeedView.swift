@@ -9,7 +9,9 @@ import SwiftUI
 
 struct FeedView: View {
     
-    @StateObject var viewModel = FeedViewModel()
+    
+    @EnvironmentObject var viewModel: FeedViewModel
+    // @StateObject var viewModel = FeedViewModel()
     
     var body: some View {
         NavigationStack {

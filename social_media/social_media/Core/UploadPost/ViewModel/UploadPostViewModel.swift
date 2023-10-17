@@ -23,6 +23,9 @@ class UploadPostViewModel: ObservableObject {
     @Published var postImage: Image?
     private var uiImage: UIImage?
     
+    
+// @EnvironmentObject var feedViewModel: FeedViewModel
+    
     //查看我们从PhotosPickerItem中选择的对象
     func loadImage(fromItem item: PhotosPickerItem?) async {
         
@@ -53,6 +56,7 @@ class UploadPostViewModel: ObservableObject {
         
         try await postRef.setData(encodePost)
         
-        objectWillChange.send()
+        // 手动刷新 FeedViewModel，以便新帖子被添加
+        // try await feedViewModel.fetchPosts()
     }
 }
