@@ -16,48 +16,50 @@ struct Post: Identifiable, Hashable, Codable {
     let imageUrl: String
     let timestamp: Timestamp
     var user: User?
+    //var isLike: Bool
 }
 
-extension Post {
-    static var MOCK_POSTS: [Post] = [
-        .init(
-            id: NSUUID().uuidString,
-            ownerUid: NSUUID().uuidString,
-            caption: "i am happy",
-            likes: 125,
-            imageUrl: "head",
-            timestamp: Timestamp(),
-            user: User.MOCK_USERS[0]
-        ),
-        
-        .init(
-            id: NSUUID().uuidString,
-            ownerUid: NSUUID().uuidString,
-            caption: "i am sad",
-            likes: 75,
-            imageUrl: "head2",
-            timestamp: Timestamp(),
-            user: User.MOCK_USERS[2]
-        ),
-        
-        .init(
-            id: NSUUID().uuidString,
-            ownerUid: NSUUID().uuidString,
-            caption: "i am angry",
-            likes: 15,
-            imageUrl: "head1",
-            timestamp: Timestamp(),
-            user: User.MOCK_USERS[1]
-        ),
-        
-        .init(
-            id: NSUUID().uuidString,
-            ownerUid: NSUUID().uuidString,
-            caption: "i am happy?",
-            likes: 1285,
-            imageUrl: "head1",
-            timestamp: Timestamp(),
-            user: User.MOCK_USERS[0]
-        )
-    ]
-}
+
+//extension Post {
+//    static var MOCK_POSTS: [Post] = [
+//        .init(
+//            id: NSUUID().uuidString,
+//            ownerUid: NSUUID().uuidString,
+//            caption: "i am happy",
+//            likes: 125,
+//            imageUrl: "head",
+//            timestamp: Timestamp(),
+//            user: User.MOCK_USERS[0]
+//        ),
+//
+//        .init(
+//            id: NSUUID().uuidString,
+//            ownerUid: NSUUID().uuidString,
+//            caption: "i am sad",
+//            likes: 75,
+//            imageUrl: "head2",
+//            timestamp: Timestamp(),
+//            user: User.MOCK_USERS[2]
+//        ),
+//
+//        .init(
+//            id: NSUUID().uuidString,
+//            ownerUid: NSUUID().uuidString,
+//            caption: "i am angry",
+//            likes: 15,
+//            imageUrl: "head1",
+//            timestamp: Timestamp(),
+//            user: User.MOCK_USERS[1]
+//        ),
+//
+//        .init(
+//            id: NSUUID().uuidString,
+//            ownerUid: NSUUID().uuidString,
+//            caption: "i am happy?",
+//            likes: 1285,
+//            imageUrl: "head1",
+//            timestamp: Timestamp(),
+//            user: User.MOCK_USERS[0]
+//        )
+//    ]
+//}

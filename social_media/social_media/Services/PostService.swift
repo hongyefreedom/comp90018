@@ -35,4 +35,30 @@ struct PostService {
         let snapshot = try await postsCollection.whereField("ownerUid", isEqualTo: uid).getDocuments()
         return try snapshot.documents.compactMap({ try $0.data(as: Post.self) })
     }
+    
+    
+//    static func updateLikes(for postID: String, isLiked: Bool, completion: @escaping (Result<Int, Error>) -> Void) {
+//        var likesIncrement: Int64 = 0
+//        if isLiked {
+//            likesIncrement = 1
+//        } else {
+//            likesIncrement = -1
+//        }
+//        
+//        let postRef = postsCollection.document(postID)
+//        postRef.updateData(["likes": FieldValue.increment(likesIncrement)]) { error in
+//            if let error = error {
+//                completion(.failure(error))
+//            } else {
+//                postRef.getDocument { document, error in
+//                    if let document = document, document.exists, let post = try? document.data(as: Post.self) {
+//                        completion(.success(post.likes))
+//                    } else {
+//                        completion(.failure(NSError(domain: "Post not found", code: 404, userInfo: nil)))
+//                    }
+//                }
+//            }
+//        }
+//    }
+
 }

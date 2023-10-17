@@ -31,20 +31,20 @@ struct MainTabView: View {
                     Image(systemName: "magnifyingglass")
                 }.tag(1)
             
-            UploadPostView(tabIndex: $selectedIndex)
+            DetectView()
                 .onAppear {
                     selectedIndex = 2
                 }
                 .tabItem {
-                    Image(systemName: "plus.square")
+                    Image(systemName: "app")
                 }.tag(2)
             
-            Text("Notifications")
+            UploadPostView(tabIndex: $selectedIndex)
                 .onAppear {
                     selectedIndex = 3
                 }
                 .tabItem {
-                    Image(systemName: "heart")
+                    Image(systemName: "plus.square")
                 }.tag(3)
             
             CurrentUserProfileView(user: user)
