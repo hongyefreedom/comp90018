@@ -43,8 +43,8 @@ struct GridView: View {
     }
 }
 
-struct GridView_Previews: PreviewProvider {
-    static var previews: some View {
-        GridView( user: User.MOCK_USERS[0])
-    }
-}
+//struct GridView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GridView( user: User.MOCK_USERS[0])
+//    }
+//}

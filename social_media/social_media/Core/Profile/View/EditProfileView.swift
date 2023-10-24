@@ -114,8 +114,8 @@ struct EditProfileRowView: View {
     
 }
 
-struct EditProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfileView(user: User.MOCK_USERS[0])
-    }
-}
+//struct EditProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditProfileView(user: User.MOCK_USERS[0])
+//    }
+//}

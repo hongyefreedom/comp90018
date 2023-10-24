@@ -23,10 +23,10 @@ struct User: Identifiable, Hashable, Codable {
     }
 }
 
-extension User {
-    static var MOCK_USERS: [User] = [
-        .init(id: NSUUID().uuidString, username: "hongye", profileImageUrl: nil, fullname: "hongye an", bio: "a pop star", email: "hongyea@student.unimelb.edu.au"),
-        .init(id: NSUUID().uuidString, username: "yixin", profileImageUrl: nil, fullname: "yixin cai", bio: "cool", email: "yixinc@student.unimelb.edu.au"),
-        .init(id: NSUUID().uuidString, username: "weiyue", profileImageUrl: nil, fullname: nil, bio: "nice", email: "weiyuez@student.unimelb.edu.au")
-    ]
-}
+//extension User {
+//    static var MOCK_USERS: [User] = [
+//        .init(id: NSUUID().uuidString, username: "hongye", profileImageUrl: nil, fullname: "hongye an", bio: "a pop star", email: "hongyea@student.unimelb.edu.au"),
+//        .init(id: NSUUID().uuidString, username: "yixin", profileImageUrl: nil, fullname: "yixin cai", bio: "cool", email: "yixinc@student.unimelb.edu.au"),
+//        .init(id: NSUUID().uuidString, username: "weiyue", profileImageUrl: nil, fullname: nil, bio: "nice", email: "weiyuez@student.unimelb.edu.au")
+//    ]
+//}

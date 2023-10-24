@@ -8,6 +8,9 @@
 import SwiftUI
 import Kingfisher
 import Firebase
+import CoreLocation
+import Combine
+
 
 func formattedDate(timestamp: Timestamp) -> String {
     let date = timestamp.dateValue()
@@ -20,16 +23,46 @@ func formattedDate(timestamp: Timestamp) -> String {
 }
 
 struct FeedCell: View {
-    
     let post: Post
     @State private var isLiked: Bool = false
     @State private var likeCount: Int
+    @State private var locationName: String?
+    @State private var cancellable: AnyCancellable? // 声明为 @State 变量
     
     init(post: Post) {
         self.post = post
         self._likeCount = State(initialValue: post.likes)
     }
-
+    
+    func getLocationName() {
+        if let location = post.location {
+            let geocoder = CLGeocoder()
+            let locationCoordinate = location.coordinate
+            let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
+            
+            cancellable = Just(location)
+                .flatMap { location in
+                    Future { promise in
+                        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+                            if let placemark = placemarks?.first {
+                                if let name = placemark.name {
+                                    promise(.success(name))
+                                } else {
+                                    promise(.success("Location: \(location.coordinate.latitude), \(location.coordinate.longitude)"))
+                                }
+                            } else {
+                                promise(.success("Location: \(location.coordinate.latitude), \(location.coordinate.longitude)"))
+                            }
+                        }
+                    }
+                }
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { name in
+                    locationName = name
+                })
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -106,9 +139,34 @@ struct FeedCell: View {
                 .padding(.leading, 10)
                 .padding(.top, 1)
                 .foregroundColor(.gray)
+            
+            if let location = post.location {
+                Group {
+                    if let locationName = locationName {
+                        HStack {
+                            Image(systemName: "location")
+                            Text(locationName)
+                        }
+                    } else {
+                        HStack {
+                            Image(systemName: "location")
+                            Text("Lat: \(location.coordinate.latitude), Lon: \(location.coordinate.longitude)")
+                        }
+                    }
+                }
+                .font(.footnote)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 10)
+                .padding(.top, 1)
+                .foregroundColor(.gray)
+                .onAppear {
+                    getLocationName()
+                }
+            }
         }
     }
 }
+
 
 
 

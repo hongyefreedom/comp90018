@@ -59,8 +59,8 @@ struct MainTabView: View {
     }
 }
 
-struct MainTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainTabView(user: User.MOCK_USERS[0])
-    }
-}
+//struct MainTabView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainTabView(user: User.MOCK_USERS[0])
+//    }
+//}

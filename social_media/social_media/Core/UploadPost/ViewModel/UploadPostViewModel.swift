@@ -24,6 +24,15 @@ class UploadPostViewModel: ObservableObject {
     private var uiImage: UIImage?
     
     
+    
+    private var locationManager: CLLocationManager
+
+    init() {
+        self.locationManager = CLLocationManager()
+        self.locationManager.requestWhenInUseAuthorization()
+    }
+    
+    
 // @EnvironmentObject var feedViewModel: FeedViewModel
     
     //查看我们从PhotosPickerItem中选择的对象
@@ -45,18 +54,39 @@ class UploadPostViewModel: ObservableObject {
         
     }
     
+    
     func uploadPost(caption: String) async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let uiImage = uiImage else { return }
-        
+
         let postRef = Firestore.firestore().collection("posts").document()
         guard let imageUrl = try await ImageUploader.uploadImage(image: uiImage) else { return }
-        let post = Post(id: postRef.documentID, ownerUid: uid, caption: caption, likes: 0, imageUrl: imageUrl, timestamp: Timestamp())
-        guard let encodePost = try? Firestore.Encoder().encode(post) else { return }
-        
-        try await postRef.setData(encodePost)
-        
-        // 手动刷新 FeedViewModel，以便新帖子被添加
-        // try await feedViewModel.fetchPosts()
+
+        // 获取当前地理位置信息
+        let currentLocation: CLLocation?
+        if let location = locationManager.location {
+            currentLocation = location
+        } else {
+            // 如果无法获取地理位置，将location赋值为 Melbourne 的经纬度
+            let melbourneLatitude = -37.8136
+            let melbourneLongitude = 144.9631
+            currentLocation = CLLocation(latitude: melbourneLatitude, longitude: melbourneLongitude)
+        }
+
+        // 创建一个空的 Post 对象
+        var post = Post(
+            id: postRef.documentID,
+            ownerUid: uid,
+            caption: caption,
+            likes: 0,
+            imageUrl: imageUrl,
+            timestamp: Timestamp(),
+            location: currentLocation
+        )
+
+        // 现在将 post 存储到 Firestore
+        guard let encodedPost = try? Firestore.Encoder().encode(post) else { return }
+        try await postRef.setData(encodedPost)
     }
+
 }
