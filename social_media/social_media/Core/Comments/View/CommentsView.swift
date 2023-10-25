@@ -43,7 +43,7 @@ struct CommentsView: View {
             Divider()
             
             HStack(spacing: 12) {
-                CircularProfileImageView(user: User.MOCK_USERS[0], size: .xSmall)
+                //CircularProfileImageView(user: User.MOCK_USERS[0], size: .xSmall)
 
                 ZStack(alignment: .trailing) {
                     TextField("Add a comment...", text: $commentText, axis: .vertical)
