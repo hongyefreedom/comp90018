@@ -16,10 +16,10 @@ struct DetectView: View {
     @State private var isFindViewPresented = false
     
     var body: some View {
-        NavigationView { // 将整个视图包裹在 NavigationView 中
+        NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Color.gray.ignoresSafeArea()
+                    //Color.gray.ignoresSafeArea()
                     
                     VStack {
                         Spacer()
@@ -70,8 +70,10 @@ struct DetectView: View {
             .navigationBarTitle("") // 清除默认的导航栏标题
             .navigationBarHidden(true) // 隐藏导航栏
         }
+        .navigationBarBackButtonHidden(true) // 隐藏返回按钮
     }
 }
+
 
 
 

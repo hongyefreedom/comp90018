@@ -14,7 +14,7 @@ struct FindView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Color.gray.ignoresSafeArea()
+                    //Color.gray.ignoresSafeArea()
                     
                     VStack {
                         Spacer()
@@ -64,8 +64,10 @@ struct FindView: View {
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }
+        .navigationBarBackButtonHidden(true) // 隐藏返回按钮
     }
 }
+
 
 struct FindView_Previews: PreviewProvider {
     static var previews: some View {

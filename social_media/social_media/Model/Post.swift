@@ -18,6 +18,8 @@ struct Post: Identifiable, Hashable, Codable {
     let timestamp: Timestamp
     var user: User?
     var location: CLLocation?
+    
+    var didLike: Bool? = false
 
     enum CodingKeys: String, CodingKey {
         case id

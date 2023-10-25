@@ -23,16 +23,28 @@ func formattedDate(timestamp: Timestamp) -> String {
 }
 
 struct FeedCell: View {
-    let post: Post
-    @State private var isLiked: Bool = false
-    @State private var likeCount: Int
+//    let post: Post
+//    @State private var isLiked: Bool = false
+//    @State private var likeCount: Int
     @State private var locationName: String?
     @State private var cancellable: AnyCancellable? // 声明为 @State 变量
     
+    @ObservedObject var viewModel: FeedCellViewModel
+    
+    var didLike: Bool { return viewModel.post.didLike ?? false }
+    
     init(post: Post) {
-        self.post = post
-        self._likeCount = State(initialValue: post.likes)
+        self.viewModel = FeedCellViewModel(post: post)
     }
+    
+    private var post: Post {
+        return viewModel.post
+    }
+    
+//    init(post: Post) {
+//        self.post = post
+//        self._likeCount = State(initialValue: post.likes)
+//    }
     
     func getLocationName() {
         if let location = post.location {
@@ -63,6 +75,8 @@ struct FeedCell: View {
         }
     }
     
+
+    
     var body: some View {
         VStack {
             HStack {
@@ -83,19 +97,17 @@ struct FeedCell: View {
                 .clipShape(Rectangle())
             
             HStack(spacing: 16) {
-                Button {
-                    isLiked.toggle()
-                    if isLiked {
-                        likeCount += 1
-                    } else {
-                        likeCount -= 1
-                    }
-                    print("Like post")
-                } label: {
-                    Image(systemName: isLiked ? "heart.fill" : "heart")
-                        .imageScale(.large)
-                        .foregroundColor(isLiked ? Color.red : Color.primary)
-                }
+                Button(action: {
+                    Task { didLike ? try await viewModel.unlike() : try await viewModel.like() }
+                }, label: {
+                    Image(systemName: didLike ? "heart.fill" : "heart")
+                        .resizable()
+                        .scaledToFill()
+                        .foregroundColor(didLike ? .red : .black)
+                        .frame(width: 20, height: 20)
+                        .font(.system(size: 20))
+                        .padding(4)
+                })
                 
                 Button {
                     print("Comment on post")
@@ -117,7 +129,7 @@ struct FeedCell: View {
             .padding(.top, 4)
             .foregroundColor(.black)
             
-            Text("\(likeCount) likes")
+            Text("\(post.likes) likes")
                 .font(.footnote)
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .leading)

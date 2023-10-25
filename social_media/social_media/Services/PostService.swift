@@ -35,30 +35,33 @@ struct PostService {
         let snapshot = try await postsCollection.whereField("ownerUid", isEqualTo: uid).getDocuments()
         return try snapshot.documents.compactMap({ try $0.data(as: Post.self) })
     }
-    
-    
-//    static func updateLikes(for postID: String, isLiked: Bool, completion: @escaping (Result<Int, Error>) -> Void) {
-//        var likesIncrement: Int64 = 0
-//        if isLiked {
-//            likesIncrement = 1
-//        } else {
-//            likesIncrement = -1
-//        }
-//        
-//        let postRef = postsCollection.document(postID)
-//        postRef.updateData(["likes": FieldValue.increment(likesIncrement)]) { error in
-//            if let error = error {
-//                completion(.failure(error))
-//            } else {
-//                postRef.getDocument { document, error in
-//                    if let document = document, document.exists, let post = try? document.data(as: Post.self) {
-//                        completion(.success(post.likes))
-//                    } else {
-//                        completion(.failure(NSError(domain: "Post not found", code: 404, userInfo: nil)))
-//                    }
-//                }
-//            }
-//        }
-//    }
 
+}
+
+
+
+
+extension PostService {
+    static func likePost(_ post: Post) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        async let _ = try await postsCollection.document(post.id).collection("post-likes").document(uid).setData([:])
+        async let _ = try await postsCollection.document(post.id).updateData(["likes": post.likes + 1])
+        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).setData([:])
+    }
+    
+    static func unlikePost(_ post: Post) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        async let _ = try await postsCollection.document(post.id).collection("post-likes").document(uid).delete()
+        async let _ = try await postsCollection.document(post.id).updateData(["likes": post.likes - 1])
+        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).delete()
+    }
+    
+    static func checkIfUserLikedPost(_ post: Post) async throws -> Bool {
+        guard let uid = Auth.auth().currentUser?.uid else { return false }
+        
+        let snapshot = try await Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).getDocument()
+        return snapshot.exists
+    }
 }
