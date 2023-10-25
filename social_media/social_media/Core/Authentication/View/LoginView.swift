@@ -37,16 +37,16 @@ struct LoginView: View {
                 }
                 .padding(.top, 20)
                 
-                Button {
-                    print("show forget password")
-                } label: {
-                    Text("Forget Password?")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .padding(.top)
-                        .padding(.trailing, 28)
-                }
-                .frame(maxWidth: .infinity, alignment: .trailing)
+//                Button {
+//                    print("show forget password")
+//                } label: {
+//                    Text("Forget Password?")
+//                        .font(.footnote)
+//                        .fontWeight(.semibold)
+//                        .padding(.top)
+//                        .padding(.trailing, 28)
+//                }
+//                .frame(maxWidth: .infinity, alignment: .trailing)
 
                 Button {
                     Task {try await viewModel.signIn()}
@@ -61,30 +61,30 @@ struct LoginView: View {
                 }
                 .padding(.vertical)
                 
-                HStack{
-                    Rectangle()
-                        .frame(width: (UIScreen.main.bounds.width / 2) - 40, height: 0.5)
-                    
-                    Text("OR")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                    
-                    Rectangle()
-                        .frame(width: (UIScreen.main.bounds.width / 2) - 40, height: 0.5)
-                }
-                .foregroundColor(.gray)
-                
-                HStack{
-                    Image("head")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    
-                    Text("Continue with Gmail")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color(.systemBlue))
-                }
-                .padding(.top, 8)
+//                HStack{
+//                    Rectangle()
+//                        .frame(width: (UIScreen.main.bounds.width / 2) - 40, height: 0.5)
+//
+//                    Text("OR")
+//                        .font(.footnote)
+//                        .fontWeight(.semibold)
+//
+//                    Rectangle()
+//                        .frame(width: (UIScreen.main.bounds.width / 2) - 40, height: 0.5)
+//                }
+//                .foregroundColor(.gray)
+//
+//                HStack{
+//                    Image("head")
+//                        .resizable()
+//                        .frame(width: 20, height: 20)
+//
+//                    Text("Continue with Gmail")
+//                        .font(.footnote)
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(Color(.systemBlue))
+//                }
+//                .padding(.top, 8)
                 
                 Spacer()
                 

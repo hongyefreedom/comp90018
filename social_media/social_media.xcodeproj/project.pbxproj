@@ -17,6 +17,9 @@
 		408FF8D42AE8D909001A5CAB /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FF8D32AE8D909001A5CAB /* CommentsViewModel.swift */; };
 		408FF8D62AE91E48001A5CAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FF8D52AE91E48001A5CAB /* ProfileViewModel.swift */; };
 		408FF8D92AE928E2001A5CAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FF8D82AE928E2001A5CAB /* Constants.swift */; };
+		408FF8DB2AE95186001A5CAB /* UserListConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FF8DA2AE95186001A5CAB /* UserListConfig.swift */; };
+		408FF8DF2AE969C4001A5CAB /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FF8DE2AE969C4001A5CAB /* UserListView.swift */; };
+		408FF8E12AE96A03001A5CAB /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FF8E02AE96A03001A5CAB /* UserListViewModel.swift */; };
 		40CED9672A9DF86900AFBE69 /* social_mediaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9662A9DF86900AFBE69 /* social_mediaApp.swift */; };
 		40CED9692A9DF86900AFBE69 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CED9682A9DF86900AFBE69 /* ContentView.swift */; };
 		40CED96B2A9DF87000AFBE69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40CED96A2A9DF87000AFBE69 /* Assets.xcassets */; };
@@ -73,6 +76,9 @@
 		408FF8D32AE8D909001A5CAB /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		408FF8D52AE91E48001A5CAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		408FF8D82AE928E2001A5CAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		408FF8DA2AE95186001A5CAB /* UserListConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListConfig.swift; sourceTree = "<group>"; };
+		408FF8DE2AE969C4001A5CAB /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
+		408FF8E02AE96A03001A5CAB /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		40CED9632A9DF86900AFBE69 /* social_media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = social_media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40CED9662A9DF86900AFBE69 /* social_mediaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = social_mediaApp.swift; sourceTree = "<group>"; };
 		40CED9682A9DF86900AFBE69 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -246,6 +252,7 @@
 			children = (
 				40CED99E2A9EE71A00AFBE69 /* User.swift */,
 				40CED9A22A9EF28500AFBE69 /* Post.swift */,
+				408FF8DA2AE95186001A5CAB /* UserListConfig.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -477,6 +484,7 @@
 				40CED9962A9ED89200AFBE69 /* IGTextFieldModifier.swift */,
 				40CED9A42A9EFBDC00AFBE69 /* GridView.swift */,
 				40D788842AA47B66000BA85A /* CircularProfileImageView.swift */,
+				408FF8DE2AE969C4001A5CAB /* UserListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				40D788902AA4981E000BA85A /* PostGridViewModel.swift */,
+				408FF8E02AE96A03001A5CAB /* UserListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -596,14 +605,17 @@
 				40D7887A2AA45F24000BA85A /* EditProfileView.swift in Sources */,
 				40D788912AA4981E000BA85A /* PostGridViewModel.swift in Sources */,
 				40D788722AA43DDF000BA85A /* LoginViewModel.swift in Sources */,
+				408FF8E12AE96A03001A5CAB /* UserListViewModel.swift in Sources */,
 				40D788802AA4727B000BA85A /* ImageUploader.swift in Sources */,
 				40CED9AB2A9F0FAC00AFBE69 /* UploadPostViewModel.swift in Sources */,
 				408FF8CC2AE8C0C3001A5CAB /* CommentsView.swift in Sources */,
+				408FF8DB2AE95186001A5CAB /* UserListConfig.swift in Sources */,
 				40CED9A72A9EFEF900AFBE69 /* ProfileHeaderView.swift in Sources */,
 				40CED99F2A9EE71A00AFBE69 /* User.swift in Sources */,
 				40CED9972A9ED89200AFBE69 /* IGTextFieldModifier.swift in Sources */,
 				40CED99D2A9EE45500AFBE69 /* CompleteSignupView.swift in Sources */,
 				40DBEF702ADE450D00F72E20 /* Timestamp+Comparable.swift in Sources */,
+				408FF8DF2AE969C4001A5CAB /* UserListView.swift in Sources */,
 				408FF8D42AE8D909001A5CAB /* CommentsViewModel.swift in Sources */,
 				408FF8C52AE8B0E7001A5CAB /* FeedCellViewModel.swift in Sources */,
 				408FF8D92AE928E2001A5CAB /* Constants.swift in Sources */,

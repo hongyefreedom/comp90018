@@ -58,10 +58,13 @@ struct ProfileHeaderView: View {
                     UserStatView(value: stats.postsCount,
                                  title: "Posts")
                     
-                    UserStatView(value: stats.followersCount, title: "Followers")
+                    NavigationLink(value: UserListConfig.followers(uid: user.id)) {
+                        UserStatView(value: stats.followersCount, title: "Followers")
+                    }
                     
-                    UserStatView(value: stats.followingCount, title: "Followings")
-                    
+                    NavigationLink(value: UserListConfig.following(uid: user.id)) {
+                        UserStatView(value: stats.followingCount, title: "Followings")
+                    }
                 }
             }
             .padding(.horizontal)
@@ -112,6 +115,9 @@ struct ProfileHeaderView: View {
             }
             Divider()
         }
+        .navigationDestination(for: UserListConfig.self, destination: { config in
+            UserListView(config: config)
+        })
         .onAppear{
             viewModel.fetchUserStats()
             viewModel.checkIfUserIsFollowed()
