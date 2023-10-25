@@ -19,7 +19,16 @@ class PostGridViewModel: ObservableObject {
     
     @MainActor
     func fetchUserPosts() async throws{
-        self.posts = try await PostService.fetchUserPosts(uid: user.id)
+        var fetchedPosts = try await PostService.fetchUserPosts(uid: user.id)
+        
+        
+        // Sort the fetchedPosts by timestamp in descending order
+        fetchedPosts.sort { post1, post2 in
+            post1.timestamp.dateValue() > post2.timestamp.dateValue()
+        }
+
+        self.posts = fetchedPosts
+        
         
         for i in 0..<posts.count {
             posts[i].user = self.user

@@ -13,6 +13,7 @@ struct GridView: View {
     //var posts: [Post]
     //let user: User
     @StateObject var viewModel: PostGridViewModel
+    @State private var selectedPost: Post? // 用于跟踪选中的帖子
     
     init(user: User){
         self._viewModel = StateObject(wrappedValue: PostGridViewModel(user: user))
@@ -29,18 +30,23 @@ struct GridView: View {
     private let imageDimension: CGFloat = (UIScreen.main.bounds.width / 3) - 1
     
     var body: some View {
-        LazyVGrid(columns: gridItems, spacing: 1) {
-            
-            // id 给每个图一个id
-            ForEach(viewModel.posts){ post in
-                KFImage(URL(string: post.imageUrl))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: imageDimension, height: imageDimension)
-                    .clipped()
+            LazyVGrid(columns: gridItems, spacing: 1) {
+                ForEach(viewModel.posts) { post in
+                    // 使用 NavigationLink 包装图片
+                    NavigationLink(destination: FeedCell(post: post), tag: post, selection: $selectedPost) {
+                        KFImage(URL(string: post.imageUrl))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: imageDimension, height: imageDimension)
+                            .clipped()
+                            .onTapGesture {
+                                // 当用户点击图片时，将选中的帖子设置为当前帖子
+                                selectedPost = post
+                            }
+                    }
+                }
             }
         }
-    }
 }
 
 //struct GridView_Previews: PreviewProvider {

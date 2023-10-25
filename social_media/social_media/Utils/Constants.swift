@@ -11,6 +11,8 @@ struct FirebaseConstants {
     
     static let Root = Firestore.firestore()
     
+    static let PostCollection = Firestore.firestore().collection("posts")
+    
     static let FollowingCollection = Firestore.firestore().collection("following")
     static let FollowersCollection = Firestore.firestore().collection("followers")
 }
