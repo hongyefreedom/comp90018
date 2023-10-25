@@ -34,8 +34,9 @@ struct CurrentUserProfileView: View {
                     Button {
                         AuthService.shared.signout()
                     } label: {
-                        Image(systemName: "line.3.horizontal")
+                        Image(systemName: "arrow.right.circle")
                             .foregroundColor(.black)
+                            .imageScale(.large)
                     }
 
                 }
@@ -44,8 +45,8 @@ struct CurrentUserProfileView: View {
     }
 }
 
-//struct CurrentUserProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CurrentUserProfileView(user: User.MOCK_USERS[0])
-//    }
-//}
+struct CurrentUserProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        CurrentUserProfileView(user: User.MOCK_USERS[0])
+    }
+}

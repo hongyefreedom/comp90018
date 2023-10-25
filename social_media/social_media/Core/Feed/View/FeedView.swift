@@ -33,12 +33,12 @@ struct FeedView: View {
                 }
             }
             
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: "paperplane")
-                        .imageScale(.large)
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Image(systemName: "paperplane")
+//                        .imageScale(.large)
+//                }
+//            }
         }
     }
 }

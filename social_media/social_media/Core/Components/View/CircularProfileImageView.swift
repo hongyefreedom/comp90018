@@ -30,11 +30,11 @@ enum ProfileImageSize {
 
 struct CircularProfileImageView: View {
     
-    let user: User
+    var user: User?
     let size: ProfileImageSize
     
     var body: some View {
-        if let imageUrl = user.profileImageUrl {
+        if let imageUrl = user?.profileImageUrl {
             
             //直接根据url打开图片
             KFImage(URL(string: imageUrl))

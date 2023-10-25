@@ -84,8 +84,8 @@ struct ProfileHeaderView: View {
     }
 }
 
-//struct ProfileHeaderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileHeaderView(user: User.MOCK_USERS[0])
-//    }
-//}
+struct ProfileHeaderView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileHeaderView(user: User.MOCK_USERS[0])
+    }
+}

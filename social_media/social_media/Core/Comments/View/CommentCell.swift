@@ -9,10 +9,10 @@ import SwiftUI
 import Kingfisher
 
 struct CommentCell: View {
-    //let comment: Comment
+    let comment: Comment
     
-    private var user: User {
-        return User.MOCK_USERS[0]
+    private var user: User? {
+        return comment.user
     }
     
     var body: some View {
@@ -21,14 +21,14 @@ struct CommentCell: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 2) {
-                    Text(user.username)
+                    Text(user?.username ?? "")
                         .fontWeight(.semibold)
                     
 //                    Text(comment.timestamp.timestampString())
 //                        .foregroundColor(.gray)
                 }
                 
-                Text("xxxxx")
+                Text(comment.commentText)
             }
             .font(.caption)
             
@@ -38,8 +38,8 @@ struct CommentCell: View {
     }
 }
 
-struct CommentCell_Previews: PreviewProvider {
-    static var previews: some View {
-        CommentCell()
-    }
-}
+//struct CommentCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CommentCell()
+//    }
+//}

@@ -118,12 +118,12 @@ struct FeedCell: View {
                         .imageScale(.large)
                 }
                 
-                Button {
-                    print("Share post")
-                } label: {
-                    Image(systemName: "paperplane")
-                        .imageScale(.large)
-                }
+//                Button {
+//                    print("Share post")
+//                } label: {
+//                    Image(systemName: "paperplane")
+//                        .imageScale(.large)
+//                }
                 
                 Spacer()
             }
@@ -179,7 +179,7 @@ struct FeedCell: View {
             }
         }
         .sheet(isPresented: $showComments, content: {
-            CommentsView()
+            CommentsView(post: post)
                 .presentationDragIndicator(.visible)
         })
     }

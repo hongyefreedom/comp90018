@@ -9,12 +9,15 @@ import SwiftUI
 
 struct CommentsView: View {
     @State private var commentText = ""
-//    @StateObject var viewModel: CommentsViewModel
-//
-//    //初始化 stateobject
-//    init(post: Post) {
-//        self._viewModel = StateObject(wrappedValue: CommentsViewModel(post: post))
+    @StateObject var viewModel: CommentsViewModel
+
+//    private var currentUser: User? {
 //    }
+    
+    //初始化 stateobject
+    init(post: Post) {
+        self._viewModel = StateObject(wrappedValue: CommentsViewModel(post: post))
+    }
     
     var body: some View {
         VStack {
@@ -28,12 +31,12 @@ struct CommentsView: View {
             
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 24) {
-//                    ForEach(viewModel.comments) { comment in
-//                        CommentCell(comment: comment)
-//                    }
-                    ForEach(0...15, id: \.self) { comment in
-                        CommentCell()
+                    ForEach(viewModel.comments) { comment in
+                        CommentCell(comment: comment)
                     }
+//                    ForEach(0...15, id: \.self) { comment in
+//                        CommentCell()
+//                    }
                 }
             }.padding(.top)
             
@@ -52,7 +55,9 @@ struct CommentsView: View {
                         }
 
                     Button {
-//                        Task {try await viewModel.uploadComment(commentText: commentText)}
+                        Task {try await viewModel.uploadComment(commentText: commentText)
+                            commentText = ""
+                        }
                     } label: {
                         Text("Post")
                             .font(.subheadline)
@@ -77,8 +82,8 @@ struct CommentsView: View {
 //    }
 }
 
-struct CommentsView_Previews: PreviewProvider {
-    static var previews: some View {
-        CommentsView()
-    }
-}
+//struct CommentsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CommentsView()
+//    }
+//}

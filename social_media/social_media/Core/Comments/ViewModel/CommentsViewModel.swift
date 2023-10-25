@@ -14,9 +14,13 @@ class CommentsViewModel: ObservableObject {
     @Published var comments = [Comment]()
     
     private let post: Post
+    private let service: CommentService
     
     init(post: Post) {
         self.post = post
+        self.service = CommentService(postId: post.id)
+        
+        Task {try await fetchComments()}
     }
     
     func uploadComment(commentText: String) async throws {
@@ -30,8 +34,25 @@ class CommentsViewModel: ObservableObject {
             commentOwnerUid: uid
         )
         
-        try await CommentService.uploadComment(comment, postId: post.id)
-
+        //self.comments.insert(comment, at: 0)
+        
+        try await service.uploadComment(comment)
+        
+        try await fetchComments()
+    }
+    
+    func fetchComments() async throws {
+        self.comments = try await service.fetchComments()
+        try await fetchUserDataForComments()
+    }
+    
+    //得到对应的user
+    private func fetchUserDataForComments() async throws {
+        for i in 0 ..< comments.count {
+            let comment = comments[i]
+            let user = try await UserService.fetchUser(withUid: comment.commentOwnerUid)
+            comments[i].user = user
+        }
     }
 }
 
