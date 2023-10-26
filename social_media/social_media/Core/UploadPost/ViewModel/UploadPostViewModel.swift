@@ -9,6 +9,7 @@ import Foundation
 import PhotosUI
 import SwiftUI
 import Firebase
+import CoreLocation
 
 @MainActor
 class UploadPostViewModel: ObservableObject {
