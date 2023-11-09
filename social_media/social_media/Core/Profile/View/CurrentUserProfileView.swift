@@ -22,11 +22,12 @@ struct CurrentUserProfileView: View {
                 // spacing = .padding(.botto)
                 ProfileHeaderView(user: user)
                 
+                
+                ProfileTabBar(user: user)
+                
                 // grid
                 // 行间距
-                GridView(user: user)
-                
-                
+                //GridView(user: user)
                 
             }
             .navigationTitle("Profile")

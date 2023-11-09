@@ -31,22 +31,22 @@ struct FeedCell: View {
     
     @ObservedObject var viewModel: FeedCellViewModel
     
+    //@ObservedObject var notviewModel: NotFeedCellViewModel
+    
     @State private var showComments = false
     
     var didLike: Bool { return viewModel.post.didLike ?? false }
     
+    var notdidLike: Bool { return viewModel.post.notdidLike ?? false }
+    
     init(post: Post) {
         self.viewModel = FeedCellViewModel(post: post)
+        //self.notviewModel = NotFeedCellViewModel(post: post)
     }
     
     private var post: Post {
         return viewModel.post
     }
-    
-//    init(post: Post) {
-//        self.post = post
-//        self._likeCount = State(initialValue: post.likes)
-//    }
     
     func getLocationName() {
         if let location = post.location {
@@ -99,17 +99,56 @@ struct FeedCell: View {
                 .clipShape(Rectangle())
             
             HStack(spacing: 16) {
+//                Button(action: {
+//                    Task { didLike ? try await viewModel.unlike() : try await viewModel.like() }
+//                }, label: {
+//                    Image(systemName: didLike ? "heart.fill" : "heart")
+//                        .resizable()
+//                        .scaledToFill()
+//                        .foregroundColor(didLike ? .red : .black)
+//                        .frame(width: 20, height: 20)
+//                        .font(.system(size: 20))
+//                        //.rotationEffect(.degrees(180)) // 旋转180度
+//                        .padding(4)
+//                })
+                
+                
                 Button(action: {
                     Task { didLike ? try await viewModel.unlike() : try await viewModel.like() }
                 }, label: {
-                    Image(systemName: didLike ? "heart.fill" : "heart")
+                    Image(systemName: didLike ? "triangle.fill" : "triangle")
                         .resizable()
                         .scaledToFill()
-                        .foregroundColor(didLike ? .red : .black)
+                        .foregroundColor(didLike ? .blue : .black)
                         .frame(width: 20, height: 20)
                         .font(.system(size: 20))
+                        //.rotationEffect(.degrees(180)) // 旋转180度
                         .padding(4)
                 })
+                .disabled(notdidLike) // 如果 didLike 为 true，则按钮不可点击
+
+                Button(action: {
+                    Task { notdidLike ? try await viewModel.notunlike() : try await viewModel.notlike() }
+                }, label: {
+                    Image(systemName: notdidLike ? "triangle.fill" : "triangle")
+                        .resizable()
+                        .scaledToFill()
+                        .foregroundColor(notdidLike ? .blue : .black)
+                        .frame(width: 20, height: 20)
+                        .font(.system(size: 20))
+                        .rotationEffect(.degrees(180)) // 旋转180度
+                        .padding(4)
+                })
+                .disabled(didLike) // 如果 didLike 为 true，则按钮不可点击
+                
+//                Text("\((post.notlikes ?? 0)) unlikes")
+//                    .font(.footnote)
+//                    .fontWeight(.semibold)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.leading, 10)
+//                    .padding(.top, 1)
+            
+                
                 
                 Button {
                     showComments.toggle()
@@ -118,18 +157,20 @@ struct FeedCell: View {
                         .imageScale(.large)
                 }
                 
-//                Button {
-//                    print("Share post")
-//                } label: {
-//                    Image(systemName: "paperplane")
-//                        .imageScale(.large)
-//                }
                 
                 Spacer()
+            
             }
             .padding(.leading, 8)
             .padding(.top, 4)
             .foregroundColor(.black)
+            
+//            Text("\(post.likes) likes")
+//                .font(.footnote)
+//                .fontWeight(.semibold)
+//                .frame(maxWidth: .infinity, alignment: .leading)
+//                .padding(.leading, 10)
+//                .padding(.top, 1)
             
             Text("\(post.likes) likes")
                 .font(.footnote)

@@ -64,4 +64,58 @@ extension PostService {
         let snapshot = try await Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).getDocument()
         return snapshot.exists
     }
+    
+    
+    static func notlikePost(_ post: Post) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        async let _ = try await postsCollection.document(post.id).collection("post-notlikes").document(uid).setData([:])
+        async let _ = try await postsCollection.document(post.id).updateData(["notlikes": (post.notlikes ?? 0) + 1])
+        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-notlikes").document(post.id).setData([:])
+    }
+    
+    static func notunlikePost(_ post: Post) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        async let _ = try await postsCollection.document(post.id).collection("post-notlikes").document(uid).delete()
+        async let _ = try await postsCollection.document(post.id).updateData(["notlikes": (post.notlikes ?? 0) - 1])
+        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-notlikes").document(post.id).delete()
+    }
+    
+    static func notcheckIfUserLikedPost(_ post: Post) async throws -> Bool {
+        guard let uid = Auth.auth().currentUser?.uid else { return false }
+        
+        let snapshot = try await Firestore.firestore().collection("users").document(uid).collection("user-notlikes").document(post.id).getDocument()
+        return snapshot.exists
+    }
 }
+
+
+
+
+
+
+//extension PostService {
+//    static func notlikePost(_ post: Post) async throws {
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        
+//        async let _ = try await postsCollection.document(post.id).collection("post-notlikes").document(uid).setData([:])
+//        async let _ = try await postsCollection.document(post.id).updateData(["notlikes": post.notlikes + 1])
+//        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-notlikes").document(post.id).setData([:])
+//    }
+//    
+//    static func notunlikePost(_ post: Post) async throws {
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        
+//        async let _ = try await postsCollection.document(post.id).collection("post-notlikes").document(uid).delete()
+//        async let _ = try await postsCollection.document(post.id).updateData(["notlikes": post.notlikes - 1])
+//        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-notlikes").document(post.id).delete()
+//    }
+//    
+//    static func notcheckIfUserLikedPost(_ post: Post) async throws -> Bool {
+//        guard let uid = Auth.auth().currentUser?.uid else { return false }
+//        
+//        let snapshot = try await Firestore.firestore().collection("users").document(uid).collection("user-notlikes").document(post.id).getDocument()
+//        return snapshot.exists
+//    }
+//}

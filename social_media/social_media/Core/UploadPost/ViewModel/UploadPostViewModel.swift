@@ -82,7 +82,8 @@ class UploadPostViewModel: ObservableObject {
             likes: 0,
             imageUrl: imageUrl,
             timestamp: Timestamp(),
-            location: currentLocation
+            location: currentLocation,
+            notlikes: 0
         )
 
         // 现在将 post 存储到 Firestore

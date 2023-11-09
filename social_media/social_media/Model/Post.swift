@@ -20,6 +20,9 @@ struct Post: Identifiable, Hashable, Codable {
     var location: CLLocation?
     
     var didLike: Bool? = false
+    
+    var notlikes: Int?
+    var notdidLike: Bool? = false
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -32,9 +35,10 @@ struct Post: Identifiable, Hashable, Codable {
         case location
         case locationLatitude // 添加地理位置纬度键
         case locationLongitude // 添加地理位置经度键
+        //case notlikes
     }
 
-    init(id: String, ownerUid: String, caption: String, likes: Int, imageUrl: String, timestamp: Timestamp, location: CLLocation?, user: User? = nil) {
+    init(id: String, ownerUid: String, caption: String, likes: Int, imageUrl: String, timestamp: Timestamp, location: CLLocation?, user: User? = nil, notlikes: Int) {
         self.id = id
         self.ownerUid = ownerUid
         self.caption = caption
@@ -43,6 +47,7 @@ struct Post: Identifiable, Hashable, Codable {
         self.timestamp = timestamp
         self.location = location
         self.user = user
+        //self.notlikes = notlikes
     }
 
     init(from decoder: Decoder) throws {
@@ -63,6 +68,8 @@ struct Post: Identifiable, Hashable, Codable {
         } else {
             location = nil
         }
+        
+        //notlikes = try container.decode(Int.self, forKey: .notlikes)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -81,6 +88,8 @@ struct Post: Identifiable, Hashable, Codable {
             try container.encode(location.coordinate.latitude, forKey: .locationLatitude)
             try container.encode(location.coordinate.longitude, forKey: .locationLongitude)
         }
+        
+        //try container.encode(notlikes, forKey: .notlikes)
     }
 }
 
