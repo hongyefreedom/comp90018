@@ -10,6 +10,9 @@ import SwiftUI
 struct FindView: View {
     @State private var isDetectViewPresented = false
     
+    @Binding var tabIndex: Int
+    @Binding var caption1: String
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -31,7 +34,7 @@ struct FindView: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: DetectView(), isActive: $isDetectViewPresented) {
+                        NavigationLink(destination: DetectView(tabIndex: $tabIndex, caption1: $caption1), isActive: $isDetectViewPresented) {
                             EmptyView()
                         }
                         
@@ -47,7 +50,7 @@ struct FindView: View {
                                 .padding(.horizontal)
                         }
                         
-                        NavigationLink(destination: DetectView()) {
+                        NavigationLink(destination: DetectView(tabIndex: $tabIndex, caption1: $caption1)) {
                             Text("View Detect Results")
                                 .font(.title)
                                 .foregroundColor(.white)
@@ -71,6 +74,6 @@ struct FindView: View {
 
 struct FindView_Previews: PreviewProvider {
     static var previews: some View {
-        FindView()
+        FindView(tabIndex: .constant(0), caption1: .constant("hihi"))
     }
 }

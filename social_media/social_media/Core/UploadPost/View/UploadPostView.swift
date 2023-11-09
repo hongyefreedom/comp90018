@@ -10,7 +10,7 @@ import PhotosUI
 
 struct UploadPostView: View {
     
-    @State private var caption = ""
+    @State private var caption = "result is "
     @State private var imagePickerPresented = false
     
     @EnvironmentObject var feedViewModel: FeedViewModel
@@ -19,6 +19,10 @@ struct UploadPostView: View {
     
     // 和另外某个绑定
     @Binding var tabIndex: Int
+    @Binding var caption1: String
+    
+    @State private var caption2 = ""
+    
     
     var body: some View {
         VStack {
@@ -73,13 +77,17 @@ struct UploadPostView: View {
             Spacer()
         }
         .onAppear{
+            caption = caption + caption1
             imagePickerPresented.toggle()
         }
         .photosPicker(isPresented: $imagePickerPresented, selection: $viewModel.selectedImage)
+        .navigationBarBackButtonHidden(true) // 隐藏返回按钮
     }
+
     
     func clearPostDataAndReturnToFeed() {
         caption = ""
+        caption1 = ""
         viewModel.selectedImage = nil
         viewModel.postImage = nil
         tabIndex = 0
@@ -88,6 +96,6 @@ struct UploadPostView: View {
 
 struct UploadPostView_Previews: PreviewProvider {
     static var previews: some View {
-        UploadPostView(tabIndex: .constant(0))
+        UploadPostView(tabIndex: .constant(0), caption1: .constant("gold"))
     }
 }

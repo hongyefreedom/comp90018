@@ -15,6 +15,13 @@ extension Color {
 struct DetectView: View {
     @State private var isFindViewPresented = false
     
+    @State private var selectedIndex = 3
+    
+    @State private var caption = "fe"
+    
+    @Binding var tabIndex: Int
+    @Binding var caption1: String
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -37,7 +44,7 @@ struct DetectView: View {
                         Spacer()
                         
                         // 使用NavigationLink来实现跳转
-                        NavigationLink(destination: FindView(), isActive: $isFindViewPresented) {
+                        NavigationLink(destination: FindView(tabIndex: $selectedIndex, caption1: $caption1), isActive: $isFindViewPresented) {
                             EmptyView()
                         }
                         
@@ -53,7 +60,12 @@ struct DetectView: View {
                                 .padding(.horizontal)
                         }
                         
-                        NavigationLink(destination: FindView()) {
+                        Button {
+                            Task {
+                                caption1 = "fe"
+                                tabIndex = 3
+                            }
+                        } label: {
                             Text("View Results")
                                 .font(.title)
                                 .foregroundColor(.white)
@@ -79,6 +91,6 @@ struct DetectView: View {
 
 struct DetectView_Previews: PreviewProvider {
     static var previews: some View {
-        DetectView()
+        DetectView(tabIndex: .constant(0), caption1: .constant("fe"))
     }
 }

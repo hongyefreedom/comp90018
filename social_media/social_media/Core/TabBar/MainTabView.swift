@@ -11,6 +11,7 @@ struct MainTabView: View {
     
     let user: User
     @State private var selectedIndex = 0
+    @State private var caption1 = ""
     
     var body: some View {
         TabView(selection: $selectedIndex) {
@@ -31,7 +32,7 @@ struct MainTabView: View {
                     Image(systemName: "magnifyingglass")
                 }.tag(1)
             
-            DetectView()
+            DetectView(tabIndex: $selectedIndex, caption1: $caption1)
                 .onAppear {
                     selectedIndex = 2
                 }
@@ -39,7 +40,7 @@ struct MainTabView: View {
                     Image(systemName: "app")
                 }.tag(2)
             
-            UploadPostView(tabIndex: $selectedIndex)
+            UploadPostView(tabIndex: $selectedIndex, caption1: $caption1)
                 .onAppear {
                     selectedIndex = 3
                 }
