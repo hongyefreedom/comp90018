@@ -40,7 +40,6 @@ struct GridView: View {
                             .frame(width: imageDimension, height: imageDimension)
                             .clipped()
                             .onTapGesture {
-                                // 当用户点击图片时，将选中的帖子设置为当前帖子
                                 selectedPost = post
                             }
                     }

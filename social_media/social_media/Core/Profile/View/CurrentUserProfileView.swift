@@ -26,6 +26,8 @@ struct CurrentUserProfileView: View {
                 // 行间距
                 GridView(user: user)
                 
+                
+                
             }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)

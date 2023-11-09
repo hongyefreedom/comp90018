@@ -7,6 +7,8 @@
 
 import SwiftUI
 import CoreMotion
+import AudioToolbox
+
 
 
 class MotionManager: ObservableObject {
@@ -24,16 +26,35 @@ class MotionManager: ObservableObject {
     }
 }
 
+
+
 struct MagneticView: View {
+    
+    let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    
     @StateObject var motionManager = MotionManager()
+    @State var magneticValue = 0.0
+    @State var preMagneticValue = 0.0
 
     var body: some View {
         VStack {
-            Text("Magnetic Field:")
-            Text("X: \(motionManager.magneticField.x)")
-            Text("Y: \(motionManager.magneticField.y)")
-            Text("Z: \(motionManager.magneticField.z)")
+            Text("Magnetic: \(magneticValue)")
+                .onReceive(timer) { _ in
+                    preMagneticValue = magneticValue
+                    magneticValue = motionManager.magneticField.x + motionManager.magneticField.y + motionManager.magneticField.z
+                    
+                    if(abs(magneticValue - preMagneticValue) > 50) {
+                        AudioServicesPlaySystemSound(1005)
+                    }
+                    
+                    
+                }
+            
+                        
+
         }.padding()
+        
+        
     }
 }
 

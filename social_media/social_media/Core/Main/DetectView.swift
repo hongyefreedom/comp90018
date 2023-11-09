@@ -10,61 +10,93 @@ import SwiftUI
 extension Color {
     static let gold = Color(red: 1.0, green: 0.84, blue: 0.0)
     static let silver = Color(red: 0.75, green: 0.75, blue: 0.75)
+    static let yello = Color(red: 1, green: 250/255, blue: 205/255)
 }
 
 struct DetectView: View {
     @State private var isFindViewPresented = false
+    @State private var startDetect = false
     
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    //Color.gray.ignoresSafeArea()
+                    
+                    
+                    NavigationLink(destination: FindView(), isActive: $isFindViewPresented) {
+                        
+                        EmptyView()
+                    }
+                    
+                    
                     
                     VStack {
                         Spacer()
+                        HStack {
+                            Button(action: {
+                                if(startDetect) {
+                                    startDetect = false
+                                }else {
+                                    startDetect = true
+                                }
+                                
+                            }) {
+                                
+                                if(startDetect) {
+                                    Text("Stop Detecting")
+                                        .font(.body)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
+                                        .padding(.horizontal)
+                                }else {
+                                    Text("Start Detecting")
+                                        .font(.body)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
+                                        .padding(.horizontal)
+                                }
+                                
+                            }
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: FindView()) {
+                                Text("View Results")
+                                    .font(.body)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal)
+                            }
+                        }
+                        
+                        
+                     
                         
                         ZStack {
                             Circle()
                                 .fill(Color.silver)
-                                .frame(width: geometry.size.width)
+                                .frame(width: geometry.size.width*0.75)
                             
-                            Text("Detect")
-                                .font(.largeTitle)
-                                .foregroundColor(.black)
+                            Circle()
+                                .fill(Color.yello)
+                                .frame(width: geometry.size.width/2)
+                            
+                            if(startDetect) {
+                                MagneticView()
+                            }
+                            
                         }
                         
                         Spacer()
-                        
-                        // 使用NavigationLink来实现跳转
-                        NavigationLink(destination: FindView(), isActive: $isFindViewPresented) {
-                            EmptyView()
-                        }
-                        
-                        Button(action: {
-                            isFindViewPresented = true
-                        }) {
-                            Text("Start Detecting")
-                                .font(.title)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                                .padding(.horizontal)
-                        }
-                        
-                        NavigationLink(destination: FindView()) {
-                            Text("View Results")
-                                .font(.title)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                                .padding(.horizontal)
-                        }
-                        
-                        Spacer()
-                    }
+                    }.frame(
+                        maxWidth: .infinity, maxHeight: .infinity
+                    )
                 }
             }
             .navigationBarTitle("") // 清除默认的导航栏标题
