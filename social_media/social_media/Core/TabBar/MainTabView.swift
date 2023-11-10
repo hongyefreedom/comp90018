@@ -10,7 +10,7 @@ import SwiftUI
 struct MainTabView: View {
     
     let user: User
-    @State private var selectedIndex = 0
+    @State private var selectedIndex = 2
     
     var body: some View {
         TabView(selection: $selectedIndex) {
@@ -20,7 +20,7 @@ struct MainTabView: View {
                     selectedIndex = 0
                 }
                 .tabItem {
-                    Image(systemName: "house")
+                    Image(systemName: "light.beacon.max")
                 }.tag(0)
             
             SearchView()
@@ -36,7 +36,7 @@ struct MainTabView: View {
                     selectedIndex = 2
                 }
                 .tabItem {
-                    Image(systemName: "app")
+                    Image(systemName: "dot.circle.viewfinder")
                 }.tag(2)
             
             UploadPostView(tabIndex: $selectedIndex)
@@ -52,7 +52,7 @@ struct MainTabView: View {
                     selectedIndex = 4
                 }
                 .tabItem {
-                    Image(systemName: "person")
+                    Image(systemName: "face.smiling")
                 }.tag(4)
         }
         .accentColor(.black)

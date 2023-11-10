@@ -83,10 +83,14 @@ struct FeedCell: View {
         VStack {
             HStack {
                 if let user = post.user {
-                    CircularProfileImageView(user: user, size: .xSmall)
-                    Text(user.username)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
+                    NavigationLink(destination: ProfileView(user: user)
+                    ){
+                        CircularProfileImageView(user: user, size: .xSmall)
+                        Text(user.username)
+                            .font(.footnote)
+                            .fontWeight(.semibold)
+                        
+                    }
                 }
                 Spacer()
             }
