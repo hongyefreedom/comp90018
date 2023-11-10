@@ -23,14 +23,6 @@ struct MainTabView: View {
                     Image(systemName: "light.beacon.max")
                 }.tag(0)
             
-            SearchView()
-                .onAppear {
-                    selectedIndex = 1
-                }
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                }.tag(1)
-            
             DetectView()
                 .onAppear {
                     selectedIndex = 2
@@ -39,21 +31,13 @@ struct MainTabView: View {
                     Image(systemName: "dot.circle.viewfinder")
                 }.tag(2)
             
-            UploadPostView(tabIndex: $selectedIndex)
+            CurrentUserProfileView(user: user)
                 .onAppear {
                     selectedIndex = 3
                 }
                 .tabItem {
-                    Image(systemName: "plus.square")
-                }.tag(3)
-            
-            CurrentUserProfileView(user: user)
-                .onAppear {
-                    selectedIndex = 4
-                }
-                .tabItem {
                     Image(systemName: "face.smiling")
-                }.tag(4)
+                }.tag(3)
         }
         .accentColor(.black)
     }

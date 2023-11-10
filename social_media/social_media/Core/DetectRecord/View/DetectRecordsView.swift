@@ -11,15 +11,19 @@ import Kingfisher
 struct DetectRecordsView: View {
     
     @State private var showAlert = false
-    var records: [DetectionRecord]
+    @StateObject var viewModel: DetectionRecordModel
+    
+    init(user: User){
+        self._viewModel = StateObject(wrappedValue: DetectionRecordModel(user: user))
+    }
    
     var body: some View {
         NavigationView  {
             LazyVStack(spacing: 20) {
                 
-                ForEach(records) { record in
+                ForEach(viewModel.records) { record in
                     
-                    NavigationLink(destination: RecordDetailView(record: record)
+                    NavigationLink(destination: RecordDetailView(record: record, showSave: false)
                     ) {
                         Text(record.metal)
                             .font(.body)
@@ -31,21 +35,8 @@ struct DetectRecordsView: View {
                         Text("Mag")
                         Text("Time")
                         
-                        Button("Publish") {
-                            showAlert = true
-                        }
-                        .alert(isPresented: $showAlert) {
-                            Alert(
-                            title: Text("Important message"),
-                            message: Text("Please choose an option."),
-                            primaryButton: .default(Text("First Option")) {
-                                // Handle the first option
-                            },
-                            secondaryButton: .cancel(Text("Second Option")) {
-                                // Handle the second option
-                            }
-                        )
-                    }
+                        
+                        
                         
                         Spacer()
                     }
@@ -57,8 +48,8 @@ struct DetectRecordsView: View {
     }
 }
 
-struct DetectRecordsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetectRecordsView(records: DetectionRecord.MOCK_RECORDS)
-    }
-}
+//struct DetectRecordsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetectRecordsView(records: DetectionRecord.MOCK_RECORDS)
+//    }
+//}

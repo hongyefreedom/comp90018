@@ -31,7 +31,7 @@ struct ProfileTabBar: View {
                 Button {
                     selectedTab = 1
                 }label: {
-                    Image(systemName: "magnifyingglass").fixedSize()
+                    Image(systemName: "list.bullet.indent").fixedSize()
                 }
                 .foregroundColor(selectedTab == 1 ? .blue : .gray)
                 
@@ -43,7 +43,9 @@ struct ProfileTabBar: View {
                 GridView(user: user)
                 
             } else if selectedTab == 1 {
-                DetectRecordsView(records: DetectionRecord.MOCK_RECORDS)
+                
+                DetectRecordsView(user: user)
+                
             }
         }
     }

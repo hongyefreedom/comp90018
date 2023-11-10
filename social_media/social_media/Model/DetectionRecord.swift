@@ -11,10 +11,16 @@ import Firebase
 struct DetectionRecord: Identifiable, Hashable, Codable{
     let id: String
     let ownerUid: String
-    let imageUrl: String
+    var user: User?
+
     let x: Double
     let y: Double
     let z: Double
+    
+    let baseX : Double
+    let baseY : Double
+    let baseZ : Double
+    
     let metal: String
     let timestamp: Timestamp
     
@@ -25,10 +31,15 @@ extension DetectionRecord {
             .init(
                 id: NSUUID().uuidString,
                 ownerUid: NSUUID().uuidString,
-                imageUrl: "head",
+
                 x: 1,
                 y: 2,
                 z: 3,
+                
+                baseX: 1,
+                baseY: 2,
+                baseZ: 3,
+                
                 metal: "Au",
                 timestamp: Timestamp()
             ),
@@ -36,10 +47,14 @@ extension DetectionRecord {
             .init(
                 id: NSUUID().uuidString,
                 ownerUid: NSUUID().uuidString,
-                imageUrl: "head1",
+
                 x: 1,
                 y: 2,
                 z: 3,
+                baseX: 1,
+                baseY: 2,
+                baseZ: 3,
+                
                 metal: "Fe",
                 timestamp: Timestamp()
             ),
@@ -47,10 +62,14 @@ extension DetectionRecord {
             .init(
                 id: NSUUID().uuidString,
                 ownerUid: NSUUID().uuidString,
-                imageUrl: "head2",
+
                 x: 1,
                 y: 2,
                 z: 3,
+                baseX: 1,
+                baseY: 2,
+                baseZ: 3,
+                
                 metal: "Ti",
                 timestamp: Timestamp()
             )

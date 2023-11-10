@@ -24,7 +24,6 @@ struct ProfileView: View {
                 // spacing = .padding(.botto)
                 ProfileHeaderView(user: user)
                 
-             
                 ProfileTabBar(user: user)
             }
             .navigationTitle("Profile")

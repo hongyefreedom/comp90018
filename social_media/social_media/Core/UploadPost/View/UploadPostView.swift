@@ -10,16 +10,30 @@ import PhotosUI
 
 struct UploadPostView: View {
     
-    @State private var caption = ""
+    @State private var caption: String
     @State private var imagePickerPresented = false
     
     @EnvironmentObject var feedViewModel: FeedViewModel
     @StateObject var viewModel = UploadPostViewModel()
     
-    @Binding var tabIndex: Int
     
     @State private var canPost = false
     @State private var isUploading = false
+    
+    var record: DetectionRecord
+    
+    init(record: DetectionRecord) {
+        self.record = record
+        
+        let delta = sqrt(
+            pow(record.x - record.baseX, 2) +
+            pow(record.y - record.baseY, 2) +
+            pow(record.z - record.baseZ, 2)
+        )
+        
+        
+        caption = "The result of this record is \(record.metal)\n Total Magnetic Change: \(delta)"
+    }
     
     
     var body: some View {
@@ -27,15 +41,6 @@ struct UploadPostView: View {
         ZStack {
             VStack {
                 HStack {
-                    
-                    Button {
-                        clearPostDataAndReturnToFeed()
-                        
-                    } label: {
-                        Text("Cancel")
-                    }
-                    
-                    Spacer()
                     
                     Text("New Post")
                         .fontWeight(.semibold)
@@ -105,13 +110,12 @@ struct UploadPostView: View {
         caption = ""
         viewModel.selectedImage = nil
         viewModel.postImage = nil
-        tabIndex = 0
     }
 }
 
 
-struct UploadPostView_Previews: PreviewProvider {
-    static var previews: some View {
-        UploadPostView(tabIndex: .constant(0))
-    }
-}
+//struct UploadPostView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UploadPostView(tabIndex: .constant(0))
+//    }
+//}

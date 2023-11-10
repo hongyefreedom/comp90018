@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct FindView: View {
     @State private var isDetectViewPresented = false
     
@@ -19,15 +20,7 @@ struct FindView: View {
                     VStack {
                         Spacer()
                         
-                        ZStack {
-                            Circle()
-                                .fill(Color.silver)
-                                .frame(width: geometry.size.width)
-                            
-                            Text("FindMe")
-                                .font(.largeTitle)
-                                .foregroundColor(.black)
-                        }
+                        MagneticFindView()
                         
                         Spacer()
                         
