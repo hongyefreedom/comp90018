@@ -44,6 +44,7 @@ struct CurrentUserProfileView: View {
 
                 }
             }
+            .background(Color.cream)
         }
     }
 }

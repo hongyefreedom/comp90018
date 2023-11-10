@@ -50,6 +50,7 @@ struct UserListView: View {
             .padding(.top, 8)
         }
         .task { await viewModel.fetchUsers(forConfig: config)}
+        .background(Color.cream)
     }
 }
 

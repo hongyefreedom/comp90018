@@ -12,8 +12,21 @@ struct RecordDetailView: View {
     
     var record: DetectionRecord
     var showSave : Bool
+    var delta : Double
     
     @State var isNav = false
+    
+    init(record: DetectionRecord, showSave: Bool) {
+        self.record = record
+        self.showSave = showSave
+        
+        delta = sqrt(
+            pow(record.x - record.baseX, 2) +
+            pow(record.y - record.baseY, 2) +
+            pow(record.z - record.baseZ, 2)
+        )
+    }
+
     
     var body: some View {
         
@@ -31,8 +44,8 @@ struct RecordDetailView: View {
                     Text("Your Result is: \(record.metal)")
                     
                     
-                    Text("Magnetic before Detect: \((record.x + record.y + record.z))")
-                    Text("Magnetic after Detect: \((record.baseX + record.baseY + record.baseZ))")
+                    Text("Magnetic Change: \(delta)")
+                    
                 }
             }
             
@@ -46,12 +59,25 @@ struct RecordDetailView: View {
                     }) {
                         Text("Save")
                             .font(.body)
-                            .foregroundColor(.white)
+                            .bold()
+                            .foregroundColor(Color.orange1)
                             .padding()
-                            .background(Color.blue)
-                            .cornerRadius(10)
+                            .background(Color.fae)
                             .padding(.horizontal)
-                    }.hidden()
+                        }.hidden()
+                    
+                    Button(action: {
+                        isNav = true
+                    }) {
+                        Text("Publish")
+                            .font(.body)
+                            .bold()
+                            .foregroundColor(Color.orange1)
+                            .padding()
+                            .background(Color.fae)
+                            .padding(.horizontal)
+                    }
+                    
                 }else {
                     Button(action: {
                         Task {
@@ -60,31 +86,34 @@ struct RecordDetailView: View {
                     }) {
                         Text("Save")
                             .font(.body)
-                            .foregroundColor(.white)
+                            .bold()
+                            .foregroundColor(Color.orange1)
                             .padding()
-                            .background(Color.blue)
-                            .cornerRadius(10)
+                            .background(Color.fae)
                             .padding(.horizontal)
                     }
+                    
+                    Button(action: {
+                        isNav = true
+                    }) {
+                        Text("Publish")
+                            .font(.body)
+                            .bold()
+                            .foregroundColor(Color.orange1)
+                            .padding()
+                            .background(Color.fae)
+                            .padding(.horizontal)
+                    }.hidden()
+                    
                 }
                 
-                Button(action: {
-                    isNav = true
-                }) {
-                    Text("Publish")
-                        .font(.body)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
-                }
                 
                 NavigationLink("",destination: UploadPostView(record: record), isActive: $isNav
                )
                 
             }
         }
+        .background(Color.cream)
 
     }
 }

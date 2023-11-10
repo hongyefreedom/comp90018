@@ -35,6 +35,7 @@ struct CommentCell: View {
             Spacer()
         }
         .padding(.horizontal)
+        .background(Color.cream)
     }
 }
 

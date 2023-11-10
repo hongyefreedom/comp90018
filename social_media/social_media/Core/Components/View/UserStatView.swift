@@ -27,6 +27,7 @@ struct UserStatView: View {
         }
         .opacity(value == 0 ? 0.5 : 1.0)
         .frame(width: 87)
+        .background(Color.cream)
     }
 }
 

@@ -36,7 +36,6 @@ struct CircularProfileImageView: View {
     var body: some View {
         if let imageUrl = user?.profileImageUrl {
             
-            //直接根据url打开图片
             KFImage(URL(string: imageUrl))
                 .resizable()
                 .scaledToFill()
@@ -50,6 +49,7 @@ struct CircularProfileImageView: View {
                 .foregroundColor(Color(.systemGray4))
         }
     }
+    //.background(Color.cream)
 }
 
 //struct CircularProfileImageView_Previews: PreviewProvider {

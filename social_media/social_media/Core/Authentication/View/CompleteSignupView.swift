@@ -36,14 +36,16 @@ struct CompleteSignupView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .frame(width: 360, height: 44)
-                    .foregroundColor(.white)
-                    .background(Color(.systemBlue))
+                    .background(Color.fae)
+                    .foregroundColor(Color.orange1)
+                    .bold()
                     .cornerRadius(8)
             }
             .padding(.vertical)
             
             Spacer()
         }
+        .background(Color.cream)
     }
 }
 

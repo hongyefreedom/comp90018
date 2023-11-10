@@ -32,7 +32,7 @@ struct GridView: View {
     var body: some View {
             LazyVGrid(columns: gridItems, spacing: 1) {
                 ForEach(viewModel.posts) { post in
-                    // 使用 NavigationLink 包装图片
+                    
                     NavigationLink(destination: FeedCell(post: post), tag: post, selection: $selectedPost) {
                         KFImage(URL(string: post.imageUrl))
                             .resizable()
@@ -45,6 +45,7 @@ struct GridView: View {
                     }
                 }
             }
+            .background(Color.cream)
         }
 }
 

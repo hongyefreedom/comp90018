@@ -104,6 +104,7 @@ struct UploadPostView: View {
             }
             .photosPicker(isPresented: $imagePickerPresented, selection: $viewModel.selectedImage)
         }
+        .background(Color.cream)
         
     }
     func clearPostDataAndReturnToFeed() {

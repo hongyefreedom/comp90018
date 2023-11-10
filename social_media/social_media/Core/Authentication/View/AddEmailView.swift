@@ -42,8 +42,9 @@ struct AddEmailView: View {
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .frame(width: 360, height: 44)
-                        .foregroundColor(.white)
-                        .background(Color(.systemBlue))
+                        .background(Color.fae)
+                        .foregroundColor(Color.orange1)
+                        .bold()
                         .cornerRadius(8)
                 }
                 .padding(.vertical)
@@ -51,6 +52,7 @@ struct AddEmailView: View {
                 Spacer()
                 
             }
+            .background(Color.cream)
 //            .toolbar {
 //                ToolbarItem(placement: .navigationBarLeading) {
 //                    Image(systemName: "chevron.left")

@@ -90,6 +90,7 @@ struct EditProfileView: View {
             
             Spacer()
         }
+        .background(Color.cream)
     }
 }
 
@@ -113,6 +114,7 @@ struct EditProfileRowView: View {
         }
         .font(.subheadline)
         .frame(height: 36)
+        .background(Color.cream)
     }
     
 }

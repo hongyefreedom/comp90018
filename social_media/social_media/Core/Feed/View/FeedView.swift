@@ -32,6 +32,7 @@ struct FeedView: View {
                         .frame(width: 32, height: 32)
                 }
             }
+            .background(Color.cream)
             
 //            .toolbar {
 //                ToolbarItem(placement: .navigationBarTrailing) {

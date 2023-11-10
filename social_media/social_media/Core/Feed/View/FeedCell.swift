@@ -120,10 +120,10 @@ struct FeedCell: View {
                 Button(action: {
                     Task { didLike ? try await viewModel.unlike() : try await viewModel.like() }
                 }, label: {
-                    Image(systemName: didLike ? "triangle.fill" : "triangle")
+                    Image(systemName: didLike ? "hand.thumbsup.fill" : "hand.thumbsup")
                         .resizable()
                         .scaledToFill()
-                        .foregroundColor(didLike ? .blue : .black)
+                        .foregroundColor(didLike ? Color.redvine : .black)
                         .frame(width: 20, height: 20)
                         .font(.system(size: 20))
                         //.rotationEffect(.degrees(180)) // 旋转180度
@@ -134,13 +134,13 @@ struct FeedCell: View {
                 Button(action: {
                     Task { notdidLike ? try await viewModel.notunlike() : try await viewModel.notlike() }
                 }, label: {
-                    Image(systemName: notdidLike ? "triangle.fill" : "triangle")
+                    Image(systemName: notdidLike ? "hand.thumbsdown.fill" : "hand.thumbsdown")
                         .resizable()
                         .scaledToFill()
-                        .foregroundColor(notdidLike ? .blue : .black)
+                        .foregroundColor(didLike ? Color.redvine : .black)
                         .frame(width: 20, height: 20)
                         .font(.system(size: 20))
-                        .rotationEffect(.degrees(180)) // 旋转180度
+                        //.rotationEffect(.degrees(180)) // 旋转180度
                         .padding(4)
                 })
                 .disabled(didLike) // 如果 didLike 为 true，则按钮不可点击
@@ -227,6 +227,7 @@ struct FeedCell: View {
             CommentsView(post: post)
                 .presentationDragIndicator(.visible)
         })
+        .background(Color.cream)
     }
 }
 

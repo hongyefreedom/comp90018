@@ -9,55 +9,58 @@ import SwiftUI
 
 
 struct FindView: View {
-    @State private var isDetectViewPresented = false
     
+    @State var isSeeking = false
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    //Color.gray.ignoresSafeArea()
                     
                     VStack {
-                        Spacer()
                         
-                        MagneticFindView()
-                        
-                        Spacer()
-                        
-                        NavigationLink(destination: DetectView(), isActive: $isDetectViewPresented) {
-                            EmptyView()
-                        }
-                        
-                        Button(action: {
-                            isDetectViewPresented = true
-                        }) {
-                            Text("Start Finding")
-                                .font(.title)
-                                .foregroundColor(.white)
+                        if(!isSeeking) {
+                            Text("Detecting Mode").font(.title)
+                            MagneticFindView()
+                            
+                            Button("Change To Seeking Mode"){
+                                isSeeking = true
+                            }.font(.title)
+                                .bold()
+                                .foregroundColor(Color.orange1)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.fae)
                                 .cornerRadius(10)
-                                .padding(.horizontal)
-                        }
-                        
-                        NavigationLink(destination: DetectView()) {
-                            Text("View Detect Results")
-                                .font(.title)
-                                .foregroundColor(.white)
+                                //.padding(.horizontal)
+                                
+                        }else {
+                            Text("Seeking Mode").font(.title)
+                            MagneticView()
+                            
+                            Button("Change To Detection Mode"){
+                                isSeeking = false
+                            }.font(.title)
+                                .bold()
+                                .foregroundColor(Color.orange1)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.fae)
                                 .cornerRadius(10)
-                                .padding(.horizontal)
+                                //.padding(.horizontal)
                         }
                         
-                        Spacer()
+
                     }
                 }
+                .background(Color.cream)
             }
             .navigationBarTitle("")
             .navigationBarHidden(true)
+            .background(Color.cream)
+            
+            
         }
         .navigationBarBackButtonHidden(true) // 隐藏返回按钮
+        .background(Color.cream)
     }
 }
 

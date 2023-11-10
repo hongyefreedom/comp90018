@@ -78,6 +78,7 @@ struct CommentsView: View {
             
 
         }
+        .background(Color.cream)
     }
 }
 

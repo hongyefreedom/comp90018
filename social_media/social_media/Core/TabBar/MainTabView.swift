@@ -20,7 +20,10 @@ struct MainTabView: View {
                     selectedIndex = 0
                 }
                 .tabItem {
-                    Image(systemName: "light.beacon.max")
+                    VStack {
+                        Image(systemName: "light.beacon.max")
+                        Text("Community")
+                    }
                 }.tag(0)
             
             DetectView()
@@ -28,7 +31,10 @@ struct MainTabView: View {
                     selectedIndex = 2
                 }
                 .tabItem {
-                    Image(systemName: "dot.circle.viewfinder")
+                    VStack {
+                        Image(systemName: "dot.circle.viewfinder")
+                        Text("Meetal")
+                    }
                 }.tag(2)
             
             CurrentUserProfileView(user: user)
@@ -36,10 +42,14 @@ struct MainTabView: View {
                     selectedIndex = 3
                 }
                 .tabItem {
-                    Image(systemName: "face.smiling")
+                    VStack {
+                        Image(systemName: "face.smiling")
+                        Text("Me")
+                    }
                 }.tag(3)
         }
         .accentColor(.black)
+        .background(Color.cream)
     }
 }
 

@@ -21,10 +21,7 @@ struct ProfileTabBar: View {
                     selectedTab = 0
                     
                 } label: {
-                    VStack {
-                        Image(systemName: "square.and.arrow.up.on.square").fixedSize()
-                        Text("published")
-                    }
+                    Image(systemName: "house").fixedSize()
                 }
                 
                 .foregroundColor(selectedTab == 0 ? .blue : .gray)
@@ -34,10 +31,7 @@ struct ProfileTabBar: View {
                 Button {
                     selectedTab = 1
                 }label: {
-                    VStack {
-                        Image(systemName: "list.bullet.indent").fixedSize()
-                        Text("record")
-                    }
+                    Image(systemName: "list.bullet.indent").fixedSize()
                 }
                 .foregroundColor(selectedTab == 1 ? .blue : .gray)
                 
@@ -54,7 +48,6 @@ struct ProfileTabBar: View {
                 
             }
         }
-        .background(Color.cream)
     }
 }
 

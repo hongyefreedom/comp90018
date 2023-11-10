@@ -18,33 +18,32 @@ struct DetectRecordsView: View {
     }
    
     var body: some View {
-        NavigationView  {
+
             LazyVStack(spacing: 20) {
                 
                 ForEach(viewModel.records) { record in
                     
                     NavigationLink(destination: RecordDetailView(record: record, showSave: false)
                     ) {
-                        Text(record.metal)
-                            .font(.body)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                        Text("Mag")
-                        Text("Time")
+                        
+                        HStack{
+                            Text(record.metal)
+                                .font(.body)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                            
+                            Text("\(record.timestamp.dateValue())")
+                        }
                         
                         
-                        
-                        
-                        Spacer()
                     }
                     
                 }
-                
-            }
         }
+            .background(Color.cream)
     }
 }
 

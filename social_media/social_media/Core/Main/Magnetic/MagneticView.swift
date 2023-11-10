@@ -35,27 +35,72 @@ struct MagneticView: View {
     @StateObject private var motionManager = MotionManager()
     @State private var magneticValue = MotionManager().magneticField
     @State private var preMagneticValue = MotionManager().magneticField
+    @State private var rotation: Double = 0
+    
+    @State var isStart = false;
+    
+    func onPress() {
+        if(isStart) {
+            isStart = false
+            withAnimation {
+                rotation = 0
+            }
+        }else {
+            isStart = true
+            withAnimation(Animation.linear(duration: 7.5).repeatForever(autoreverses: false)) {
+                rotation = 360
+            }
+        }
+    }
 
     var body: some View {
-        VStack {
-            Text("Magnetic: \(String(format: "%.2f", (magneticValue.x+magneticValue.y+magneticValue.z))) μT")
-                .onReceive(timer) { _ in
-                    
-                    magneticValue = motionManager.magneticField
-                    let delta = sqrt(
-                        pow(magneticValue.x - preMagneticValue.x, 2) +
-                        pow(magneticValue.y - preMagneticValue.y, 2) +
-                        pow(magneticValue.z - preMagneticValue.z, 2)
-                    )
-                    
-                    if(delta > 50) {
-                        AudioServicesPlaySystemSound(1005)
+        
+        NavigationView  {
+            ZStack {
+                Image("spinner")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 300, height: 200)
+                    .rotationEffect(.degrees(rotation))
+                
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: 180)
+                    .onTapGesture{
+                        onPress()
+                    }
+                
+                if(isStart) {
+                    VStack{
+                        Text("Magnetic: \(String(format: "%.2f", (magneticValue.x+magneticValue.y+magneticValue.z))) μT")
+                            .onReceive(timer) { _ in
+                                
+                                magneticValue = motionManager.magneticField
+                                let delta = sqrt(
+                                    pow(magneticValue.x - preMagneticValue.x, 2) +
+                                    pow(magneticValue.y - preMagneticValue.y, 2) +
+                                    pow(magneticValue.z - preMagneticValue.z, 2)
+                                )
+                                
+                                if(delta > 50) {
+                                    AudioServicesPlaySystemSound(1005)
+                                }
+                                
+                                preMagneticValue = magneticValue
+                                
+                            }
+                        Text("Stop")
                     }
                     
-                    preMagneticValue = magneticValue
                     
+                }else {
+                    Text("Start")
                 }
-        }.padding()
+              
+            }
+            .background(Color.cream)
+        }
+
     }
 }
 

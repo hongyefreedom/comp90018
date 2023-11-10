@@ -106,8 +106,9 @@ struct ProfileHeaderView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .frame(width: 360, height: 32)
-                    .background(buttonBackgroundColor)
-                    .foregroundColor(.white)
+                    .background(Color.fae)
+                    .foregroundColor(Color.orange1)
+                    .bold()
                     .cornerRadius(6)
                     .overlay(
                         RoundedRectangle(cornerRadius: 6)
@@ -125,6 +126,7 @@ struct ProfileHeaderView: View {
         .fullScreenCover(isPresented: $showEditProfile) {
             EditProfileView(user: user)
         }
+        .background(Color.cream)
     }
     
     func handleFollowTapped() {

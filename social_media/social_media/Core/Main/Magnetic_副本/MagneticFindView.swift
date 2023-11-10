@@ -54,7 +54,6 @@ struct MagneticFindView: View {
                     .scaledToFill()
                     .frame(width: 300, height: 200)
                     .rotationEffect(.degrees(rotation))
-                    .background(Color.cream)
                     
                 
                 Circle()
@@ -80,7 +79,7 @@ struct MagneticFindView: View {
                                 pow(magneticValue.z - preMagneticValue.z, 2)
                             )
                             
-                            if(delta > 50) {
+                            if(delta == 0) {
                                 onPress()
                                 navigateToNextPage = true
                             }
@@ -108,11 +107,8 @@ struct MagneticFindView: View {
                 
                 
                     
-            }.background(Color.cream)
-                .padding()
-                
+            }.padding()
         }
-        .background(Color.cream)
     }
 }
 

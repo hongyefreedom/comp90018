@@ -22,6 +22,7 @@ struct ContentView: View {
                 MainTabView(user: currentUser)
             }
         }
+        .background(Color.cream)
         //MainTabView()
     }
 }

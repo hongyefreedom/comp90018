@@ -28,6 +28,7 @@ struct ProfileView: View {
             }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
+            .background(Color.cream)
         }
     //}
 }

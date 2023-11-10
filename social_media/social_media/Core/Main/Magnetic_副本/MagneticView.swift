@@ -32,29 +32,30 @@ struct MagneticView: View {
     
     let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
     
-    @StateObject var motionManager = MotionManager()
-    @State var magneticValue = 0.0
-    @State var preMagneticValue = 0.0
+    @StateObject private var motionManager = MotionManager()
+    @State private var magneticValue = MotionManager().magneticField
+    @State private var preMagneticValue = MotionManager().magneticField
 
     var body: some View {
         VStack {
-            Text("Magnetic: \(magneticValue)")
+            Text("Magnetic: \(String(format: "%.2f", (magneticValue.x+magneticValue.y+magneticValue.z))) μT")
                 .onReceive(timer) { _ in
-                    preMagneticValue = magneticValue
-                    magneticValue = motionManager.magneticField.x + motionManager.magneticField.y + motionManager.magneticField.z
                     
-                    if(abs(magneticValue - preMagneticValue) > 50) {
+                    magneticValue = motionManager.magneticField
+                    let delta = sqrt(
+                        pow(magneticValue.x - preMagneticValue.x, 2) +
+                        pow(magneticValue.y - preMagneticValue.y, 2) +
+                        pow(magneticValue.z - preMagneticValue.z, 2)
+                    )
+                    
+                    if(delta > 50) {
                         AudioServicesPlaySystemSound(1005)
                     }
                     
+                    preMagneticValue = magneticValue
                     
                 }
-            
-                        
-
         }.padding()
-        
-        
     }
 }
 
