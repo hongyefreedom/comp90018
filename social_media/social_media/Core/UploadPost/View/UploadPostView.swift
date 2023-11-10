@@ -14,70 +14,93 @@ struct UploadPostView: View {
     @State private var imagePickerPresented = false
     
     @EnvironmentObject var feedViewModel: FeedViewModel
-    //这个view model负责访问并上传图片
     @StateObject var viewModel = UploadPostViewModel()
     
-    // 和另外某个绑定
     @Binding var tabIndex: Int
     
+    @State private var canPost = false
+    @State private var isUploading = false
+    
+    
     var body: some View {
-        VStack {
-            HStack {
-                
-                Button {
-                    clearPostDataAndReturnToFeed()
+        
+        ZStack {
+            VStack {
+                HStack {
                     
-                } label: {
-                    Text("Cancel")
-                }
-                
-                Spacer()
-                
-                Text("New Post")
-                    .fontWeight(.semibold)
-                
-                Spacer()
-                
-                Button {
-                    Task {
-                        try await viewModel.uploadPost(caption: caption)
+                    Button {
                         clearPostDataAndReturnToFeed()
                         
-                        //在成功上传后，手动刷新FeedViewModel，以确保新帖子被添加
-                        try await feedViewModel.fetchPosts()
-                        
+                    } label: {
+                        Text("Cancel")
                     }
-                } label: {
-                    Text("Upload")
+                    
+                    Spacer()
+                    
+                    Text("New Post")
                         .fontWeight(.semibold)
+                    
+                    Spacer()
+                    
+                    Button {
+                        Task {
+                            
+                            canPost = true
+                            isUploading = true // 开始上传时显示加载动画
+                            
+                            try await viewModel.uploadPost(caption: caption)
+                            clearPostDataAndReturnToFeed()
+                            
+                            //refresh posts
+                            try await feedViewModel.fetchPosts()
+                            
+                            // 结束上传，隐藏加载动画
+                            isUploading = false
+                            canPost = false
+                        }
+                    } label: {
+                        Text("Upload")
+                            .fontWeight(.semibold)
+                    }
+                    .disabled(canPost)
+                    
+                }
+                .padding(.horizontal)
+                
+                HStack(spacing: 12) {
+                    
+                    if let image = viewModel.postImage {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .clipped()
+                    }
+                    
+                    TextField("Enter your caption...", text: $caption, axis: .vertical)
+                }
+                .padding()
+                
+                Spacer()
+                
+                if isUploading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                        .scaleEffect(2)
+                        .padding(50)
+                        .background(Color.white)
+                        .cornerRadius(10)
                 }
                 
+                Spacer()
             }
-            .padding(.horizontal)
-            
-            HStack(spacing: 12) {
-                
-                if let image = viewModel.postImage {
-                    image
-                        .resizable()
-                        //随意缩放 - 放入格子 - 剪掉多余
-                        .scaledToFill()
-                        .frame(width: 100, height: 100)
-                        .clipped()
-                }
-                
-                TextField("Enter your caption...", text: $caption, axis: .vertical)
+            .onAppear{
+                imagePickerPresented.toggle()
             }
-            .padding()
-            
-            Spacer()
+            .photosPicker(isPresented: $imagePickerPresented, selection: $viewModel.selectedImage)
         }
-        .onAppear{
-            imagePickerPresented.toggle()
-        }
-        .photosPicker(isPresented: $imagePickerPresented, selection: $viewModel.selectedImage)
+        
     }
-    
     func clearPostDataAndReturnToFeed() {
         caption = ""
         viewModel.selectedImage = nil
@@ -85,6 +108,7 @@ struct UploadPostView: View {
         tabIndex = 0
     }
 }
+
 
 struct UploadPostView_Previews: PreviewProvider {
     static var previews: some View {
